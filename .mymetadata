@@ -3,6 +3,7 @@
   type="WEB"
   name="laughing-beer"
   id="myeclipse.1356536321363"
+  context-root="/laughing-beer"
   j2ee-spec="1.4"
   archive="laughing-beer.war">
   <attributes>

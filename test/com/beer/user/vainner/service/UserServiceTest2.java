@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.beer.user.vainner.model.User;
+import com.beer.utility.ApplicationContextHolder;
 
 
 
@@ -14,7 +15,8 @@ public class UserServiceTest2 {
 
 	@Test
 	public void testAdd() {
-		ApplicationContext factory = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//ApplicationContext factory = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext factory = ApplicationContextHolder.getApplicationContext();
 		UserService userService = (UserService) factory.getBean("userService");
 		User user = new User();
 		user.setFirstName("1");

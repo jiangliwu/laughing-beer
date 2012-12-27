@@ -2,34 +2,45 @@ package com.beer.user.vainner.dao.impl;
 
 import java.util.List;
 
+
+
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
 import com.beer.user.vainner.dao.UserDAO;
 import com.beer.user.vainner.model.User;
+import com.beer.utility.SessionFactoryHolder;
 
+
+@Component("userDAO")
 public class UserDAOImpl implements UserDAO {
 
-	@SuppressWarnings("deprecation")
+	
 	public void save(User user) {
-		System.out.println("DAO add");
-
-		Configuration cfg = new Configuration(); 
-		SessionFactory sf = cfg.configure().buildSessionFactory(); 
-		Session ss = sf.openSession();
-		ss.beginTransaction();
-		ss.save(user);
-		ss.getTransaction().commit();
+		
+		
+		Session session = SessionFactoryHolder.getSessionFactory().openSession();
+		session.beginTransaction();
+		System.out.println("begin");
+		try
+		{
+			session.save(user);
+			session.getTransaction().commit();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		finally{
+			session.close();
+		}
 	}
 
 	public void delete(User user) {
-		// TODO Auto-generated method stub
 
 	}
 
 	public List<User> findById(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
