@@ -19,20 +19,19 @@ public class UserDAOImpl implements UserDAO {
 	public void save(User user) {
 		
 		
-		Session session = SessionFactoryHolder.getSessionFactory().openSession();
-		session.beginTransaction();
-		System.out.println("begin");
+		Session session = SessionFactoryHolder.getSession();
+		session.beginTransaction();		
 		try
 		{
 			session.save(user);
 			session.getTransaction().commit();
 		}catch(Exception ex)
 		{
-			ex.printStackTrace();
-			session.getTransaction().rollback();
+			ex.printStackTrace();	
+			session.getTransaction().rollback();				
 		}
 		finally{
-			session.close();
+			SessionFactoryHolder.closeSession();    
 		}
 	}
 
