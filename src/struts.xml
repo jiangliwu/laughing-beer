@@ -7,16 +7,50 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="true" />
-    <constant name="struts.i18n" value="utf-8"/>
-
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.action.extension" value="html"/> <!-- .访问扩展名 -->
+	
+	
+	
     <package name="default" namespace="/" extends="struts-default">
+    
+    <interceptors>
+    	<interceptor name="loginInterceptor" class="com.beer.interceptor.UserLoginInterceptor"></interceptor>
+    	<interceptor-stack name="myInterceptorStack">
+    		<interceptor-ref name="defaultStack"></interceptor-ref>
+    		<interceptor-ref name="loginInterceptor"></interceptor-ref>
+    	</interceptor-stack>
+    </interceptors>
+    
+    
     	<default-action-ref name="index"></default-action-ref>
+    	
+    	<global-results>
+    		<result name="login">/user/user_login_index.jsp</result>
+    	</global-results>
+    	
+    	
     	<action name="index" class="com.beer.index.vainner.action.IndexAction">
     		<result name="success">/index.jsp</result>
     	</action>
     	
-    	<action name="userAdd" class="com.beer.user.vainner.action.UserAction" method="userAdd">
-    		<result>/useradd.jsp</result>
+    	<!-- 用户注册页面不经过过滤 -->
+    	<action name="user_register_index" class="com.beer.user.vainner.action.UserAction" method="register_index">
+    		<result>/user/user_register_index.jsp</result>
+    	</action>
+    	<action name="user_register_process" class="com.beer.user.vainner.action.UserAction" method="register_process">
+    		<result>/user/user_register_index.jsp</result>
+    	</action>
+    	<action name="user_login_process" class="com.beer.user.vainner.action.UserAction" method="login_process">
+    		<result>/user/user_register_index.jsp</result>
+    	</action>
+    	
+    	
+    	<action name="user_*" class="com.beer.user.vainner.action.UserAction" method="{1}">
+    		<result>/user/user_{1}.jsp</result>
+    		<result name="error">/error/404error.jsp</result>
+    		<!-- 拦截器 除了用户和登陆界面其他与用户有关的都需要登陆-->
+    		<interceptor-ref name="myInterceptorStack"></interceptor-ref>	
     	</action>
     </package>
     
