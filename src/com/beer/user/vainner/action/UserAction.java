@@ -51,7 +51,9 @@ public class UserAction extends ActionSupport {
 	public String login_process() {
 		System.out.println(this.username + " " + this.password);
 		System.out.println(this.remember);
-		return SUCCESS;
+		UserService userService = (UserService) ApplicationContextHolder
+				.getApplicationContext().getBean("userService");
+		return userService.login(username, password);
 	}
 
 	public String logout_index() {
