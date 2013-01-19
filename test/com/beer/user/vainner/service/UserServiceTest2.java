@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.user.vainner.model.User;
-import com.beer.utility.ApplicationContextHolder;
 
 
 

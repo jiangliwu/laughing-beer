@@ -44,6 +44,8 @@
 
 <script
 	src="<s:url value='assets/js/jquery-1.8.2.min.js' encode='false' includeParams='none'/>"></script>
+	<script
+	src="<s:url value='assets/js/tools.js' encode='false' includeParams='none'/>"></script>
 <script
 	src="<s:url value='assets/js/bootstrap.min.js' encode='false' includeParams='none'/>"></script>
 <script type="text/javascript">
@@ -82,7 +84,7 @@
 				<s:a value="/index.html" cssClass="brand">Laughing-beer</s:a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><s:a value="/index.html">
+						<li><s:a value="/index">
 								<i class="icon-home"></i> 主页</s:a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">游戏<b class="caret"></b> </a>
@@ -119,14 +121,14 @@
 						<%
 							if (request.getSession().getAttribute("username") == null) {
 						%>
-						<li><s:a action="user_register_index" includeParams="none">用户注册</s:a></li>
-						<li><s:a action="user_login_index" includeParams="none">登陆系统</s:a></li>
+						<li><s:a action="user_register!registerIndex">用户注册</s:a></li>
+						<li><a href="user/user_login.jsp">登陆系统</a></li>
 						<%
 							} else {
 						%>
 						<li> <s:a action="user_edit">修改资料</s:a></li>
 						<li>
-						<s:a action="user_logout_index">退出系统(<%=request.getSession().getAttribute("username")%>)</s:a>
+						<s:a action="user_logout">退出系统(<%=request.getSession().getAttribute("username")%>)</s:a>
 						</li>
 						<%
 							}

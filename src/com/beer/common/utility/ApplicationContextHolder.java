@@ -1,4 +1,4 @@
-package com.beer.utility;
+package com.beer.common.utility;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

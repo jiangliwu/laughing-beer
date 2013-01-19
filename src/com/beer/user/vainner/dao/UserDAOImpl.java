@@ -8,8 +8,8 @@ import org.hibernate.Session;
 
 import org.springframework.stereotype.Component;
 
+import com.beer.common.utility.SessionFactoryHolder;
 import com.beer.user.vainner.model.User;
-import com.beer.utility.SessionFactoryHolder;
 
 @Component("userDAO")
 public class UserDAOImpl implements UserDAO {

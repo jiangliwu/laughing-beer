@@ -1,12 +1,10 @@
 package com.beer.user.vainner.action;
 
-import java.util.Map;
 
-import org.springframework.context.ApplicationContext;
+import org.apache.log4j.Logger;
 
-import com.beer.user.vainner.model.User;
+import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.user.vainner.service.UserService;
-import com.beer.utility.ApplicationContextHolder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,47 +14,30 @@ public class UserAction extends ActionSupport {
 	private String username;
 	private String password;
 	private boolean remember;
+	
+	
+	private static Logger log = Logger.getLogger(UserAction.class);
+	
 
-	public String register_index() {
-		return SUCCESS;
-	}
 
-	public String register_process() {
-		if (ActionContext.getContext().getSession().get("username") != null) {
-			return "error";
-		}
-		ApplicationContext factory = ApplicationContextHolder
-				.getApplicationContext();
-		UserService userService = (UserService) factory.getBean("userService");
-		User user = new User();
-		user.setFirstName("1");
-		user.setLastName("2");
-		user.setGender("3");
-		user.setPassword("4");
-		user.setStudentId("5");
-		user.setUsername("6");
-		user.setPlayGameTimes(1);
-		userService.add(user);
 
-		ActionContext.getContext().getSession()
-				.put("username", user.getUsername());
 
-		return SUCCESS;
-	}
-
-	public String login_index() {
-		return SUCCESS;
-	}
-
-	public String login_process() {
-		System.out.println(this.username + " " + this.password);
-		System.out.println(this.remember);
+	public String login() {
 		UserService userService = (UserService) ApplicationContextHolder
 				.getApplicationContext().getBean("userService");
-		return userService.login(username, password);
+		String result =  userService.login(username, password);
+		if (result.equals("success"))
+		{
+			ActionContext.getContext().getSession()
+			.put("username",username);
+			log.debug("登陆成功!" + username );
+			return result;
+		}
+		this.addFieldError("loginError","同户名不存在或密码错误!");
+		return "error";
 	}
 
-	public String logout_index() {
+	public String logout() {
 		if (ActionContext.getContext().getSession().get("username") != null)
 			ActionContext.getContext().getSession().remove("username");
 		return SUCCESS;

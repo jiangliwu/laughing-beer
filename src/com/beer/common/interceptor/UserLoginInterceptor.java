@@ -1,4 +1,4 @@
-package com.beer.interceptor;
+package com.beer.common.interceptor;
 
 import com.opensymphony.xwork2.Action;
 
