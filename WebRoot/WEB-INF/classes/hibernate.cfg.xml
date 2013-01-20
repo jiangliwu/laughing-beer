@@ -1,22 +1,34 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
 "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"> 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-<session-factory>
-	<!-- Database connection settings -->
-	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-	<property name="connection.url">jdbc:mysql://localhost:3306/beer</property>
-	<property name="connection.username">root</property>
-	<property name="connection.password"></property>
-	
-	<!-- SQL dialect -->
-	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-	<!-- Echo all executed SQL to stdout -->
-	<property name="show_sql">true</property>
+	<session-factory>
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/beer</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
 
-	<!-- Drop and re-create the database schema on startup -->
-	<property name="hbm2ddl.auto">update</property>
-	<mapping class="com.beer.user.vainner.model.User"/>
-</session-factory>
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hbm2ddl.auto">update</property>
+		<mapping class="com.beer.user.vainner.model.User" />
+		<mapping resource="com/beer/game/vainner/model/Game.hbm.xml" />
+
+		<mapping resource="com/beer/game/vainner/model/UserGame.hbm.xml" />
+		<mapping resource="com/beer/game/vainner/model/GameProducerParameter.hbm.xml" />
+		<mapping resource="com/beer/game/vainner/model/GameProducerRecord.hbm.xml" />
+
+
+		<mapping resource="com/beer/game/vainner/model/GameRetailRecord.hbm.xml" />
+		<mapping resource="com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml" />
+		<mapping resource="com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml" />
+		<mapping resource="com/beer/game/vainner/model/GameRetailParameter.hbm.xml" />
+
+	</session-factory>
 </hibernate-configuration>

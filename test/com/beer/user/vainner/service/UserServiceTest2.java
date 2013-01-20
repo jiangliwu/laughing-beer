@@ -4,7 +4,6 @@ package com.beer.user.vainner.service;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.user.vainner.model.User;

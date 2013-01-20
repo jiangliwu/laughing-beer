@@ -1,27 +1,18 @@
-DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() : no errors
-   DEBUG main org.hibernate.hql.internal.ast.QueryTranslatorImpl - HQL: from com.beer.user.vainner.model.User as model where model.username= ?
-   DEBUG main org.hibernate.hql.internal.ast.QueryTranslatorImpl - SQL: select user0_.id as id0_, user0_.first_name as first2_0_, user0_.game_room_id as game3_0_, user0_.gender as gender0_, user0_.grade as grade0_, user0_.in_game as in6_0_, user0_.last_login_time as last7_0_, user0_.last_name as last8_0_, user0_.password as password0_, user0_.play_game_times as play10_0_, user0_.student_id as student11_0_, user0_.use_tool_times as use12_0_, user0_.username as username0_ from tbl_user user0_ where user0_.username=?
-   DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() : no errors
-   DEBUG main org.hibernate.engine.jdbc.internal.LogicalConnectionImpl - Obtaining JDBC connection
-   DEBUG main org.hibernate.engine.jdbc.internal.LogicalConnectionImpl - Obtained JDBC connection
-   DEBUG main org.hibernate.SQL - select user0_.id as id0_, user0_.first_name as first2_0_, user0_.game_room_id as game3_0_, user0_.gender as gender0_, user0_.grade as grade0_, user0_.in_game as in6_0_, user0_.last_login_time as last7_0_, user0_.last_name as last8_0_, user0_.password as password0_, user0_.play_game_times as play10_0_, user0_.student_id as student11_0_, user0_.use_tool_times as use12_0_, user0_.username as username0_ from tbl_user user0_ where user0_.username=?
-   DEBUG main org.hibernate.loader.Loader - Result set row: 0
-   DEBUG main org.hibernate.loader.Loader - Result row: EntityKey[com.beer.user.vainner.model.User#1]
-   DEBUG main org.hibernate.loader.Loader - Result set row: 1
-   DEBUG main org.hibernate.loader.Loader - Result row: EntityKey[com.beer.user.vainner.model.User#2]
-   DEBUG main org.hibernate.engine.internal.TwoPhaseLoad - Resolving associations for [com.beer.user.vainner.model.User#1]
-   DEBUG main org.hibernate.engine.internal.TwoPhaseLoad - Done materializing entity [com.beer.user.vainner.model.User#1]
-   DEBUG main org.hibernate.engine.internal.TwoPhaseLoad - Resolving associations for [com.beer.user.vainner.model.User#2]
-   DEBUG main org.hibernate.engine.internal.TwoPhaseLoad - Done materializing entity [com.beer.user.vainner.model.User#2]
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - finding TblUser instance with property: username, value: 6
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -34,21 +25,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   WARN main org.hibernate.hql.internal.ast.HqlSqlWalker - [DEPRECATION] Encountered positional parameter near line 1, column 70.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - finding User instance with property: username, value: 6
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -61,21 +91,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   WARN main org.hibernate.hql.internal.ast.HqlSqlWalker - [DEPRECATION] Encountered positional parameter near line 1, column 70.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - finding User instance with property: username, value: 6
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -88,21 +157,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   WARN main org.hibernate.hql.internal.ast.HqlSqlWalker - [DEPRECATION] Encountered positional parameter near line 1, column 70.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl start Save com.beer.user.vainner.model.User@193385d
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -115,20 +223,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl start Save com.beer.user.vainner.model.User@193385d
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -141,22 +289,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   DEBUG main com.vainner.test.Log4jTest - test
-   INFO main com.vainner.test.Log4jTest - info
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - finding User instance with property: username, value: 6
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -169,22 +355,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   WARN main org.hibernate.hql.internal.ast.HqlSqlWalker - [DEPRECATION] Encountered positional parameter near line 1, column 70.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl start delete com.beer.user.vainner.model.User@7f8062
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl start Save com.beer.user.vainner.model.User@193385d
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -197,21 +421,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl Save errororg.hibernate.TransactionException: Transaction not successfully started
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl start Save com.beer.user.vainner.model.User@193385d
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -224,20 +487,60 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl start Save com.beer.user.vainner.model.User@193385d
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
    INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
    INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
    INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
    INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
    INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
    INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
    INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
    INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
@@ -250,65 +553,43 @@ DEBUG main org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() :
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [end_time, game_id, start_time]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, start_cost, origin, delay_cost, cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_producer_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, end_goods, game_retail_record_id, begin_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_retail_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesale_parameter
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [id, price, game_id, origin, order_cost, transport_cost, cost, delay_cost, repertory_cost, discount]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_game_wholesaler_record
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [receive_goods, total_up_owe_goods, total_recive_goods, end_goods, game_retail_record_id, begin_goods, total_order_goods, this_time_profit, all_need, all_owe, storage_cost, this_time_buy, order_goods, times, game_id, actual_sale, user_id, delay_cost]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user_game
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [game_role, game_holder, game_id, user_game_id, user_id]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [game, user]
+   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [user_idx, primary, game_idx]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
    INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
    INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl 开始 com.beer.user.vainner.model.User@5973ea
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-   INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
-   INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
-   INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
-   INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
-   INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
-   INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
-   INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000006: Autocommit mode: false
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/beer]
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000046: Connection properties: {user=root, password=****}
-   INFO main org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-   INFO main org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
-   INFO main org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl  保存成功! com.beer.user.vainner.model.User@5973ea
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - finding User instance with property: username, value: 6
-   DEBUG main org.jboss.logging - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-   INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
-   INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
-   INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
-   INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
-   INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
-   INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
-   WARN main org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
-   INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000006: Autocommit mode: false
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/beer]
-   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000046: Connection properties: {user=root, password=****}
-   INFO main org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-   INFO main org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
-   INFO main org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: beer.tbl_user
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [last_login_time, student_id, game_room_id, password, id, first_name, in_game, username, last_name, gender, grade, play_game_times, use_tool_times]
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-   INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-   INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-   WARN main org.hibernate.hql.internal.ast.HqlSqlWalker - [DEPRECATION] Encountered positional parameter near line 1, column 70.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl 开始删除 com.beer.user.vainner.model.User@7f8062
-   DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl  删除成功！com.beer.user.vainner.model.User@7f8062
+   DEBUG main com.beer.game.vainner.dao.GameDAO - save successful
+   DEBUG main com.beer.game.vainner.dao.GameDAO - finding all Game instances
    
