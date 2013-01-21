@@ -30,8 +30,9 @@
 	content="Struts2 Showcase for Apache Struts Project">
 <meta name="author" content="The Apache Software Foundation">
 
-<title><decorator:title default="laughing-beer" /></title>
-
+<title><decorator:title default="laughing-beer" />
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
 	href="<s:url value='assets/css/bootstrap.css' encode='false' includeParams='none'/>"
 	rel="stylesheet" type="text/css" media="all">
@@ -45,6 +46,9 @@
 <script
 	src="<s:url value='assets/js/jquery-1.8.2.min.js' encode='false' includeParams='none'/>"></script>
 	<script
+	src="<s:url value='assets/js/application.js' encode='false' includeParams='none'/>"></script>
+	
+<script
 	src="<s:url value='assets/js/tools.js' encode='false' includeParams='none'/>"></script>
 <script
 	src="<s:url value='assets/js/bootstrap.min.js' encode='false' includeParams='none'/>"></script>
@@ -85,35 +89,39 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li><s:a value="/index">
-								<i class="icon-home"></i> 主页</s:a></li>
+								<i class="icon-home"></i> 主页</s:a>
+						</li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">游戏<b class="caret"></b> </a>
 							<ul class="dropdown-menu">
-								<li><s:a action="actionChain1!input"
-										namespace="/actionchaining" includeParams="none">创建游戏</s:a>
+								<li><s:a action="game_hall" includeParams="none">游戏大厅</s:a>
 								</li>
+								<li><s:a action="game_create!index"
+										 includeParams="none">创建游戏</s:a></li>
 								<li><s:a action="index" namespace="/config-browser"
-										includeParams="none">加入游戏</s:a></li>
-								<li><s:a value="/conversion/index.jsp">浏览我的记录</s:a></li>
+										includeParams="none">加入游戏</s:a>
+								</li>
+								<li><s:a value="/conversion/index.jsp">浏览我的记录</s:a>
+								</li>
 								<li><s:a value="/person/index.jsp">Person Manager ( by Conventions )</s:a>
 								</li>
-							</ul>
-						</li>
+							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">工具<b class="caret"></b> </a>
 							<ul class="dropdown-menu">
 								<li><s:a action="actionChain1!input"
-										namespace="/actionchaining" includeParams="none">模拟供应链</s:a>
-								</li>
+										namespace="/actionchaining" includeParams="none">模拟供应链</s:a></li>
 								<li><s:a action="index" namespace="/config-browser"
-										includeParams="none">供应链数据分析</s:a></li>
-								<li><s:a value="/conversion/index.jsp">浏览我的记录</s:a></li>
+										includeParams="none">供应链数据分析</s:a>
+								</li>
+								<li><s:a value="/conversion/index.jsp">浏览我的记录</s:a>
+								</li>
 								<li><s:a value="/person/index.jsp">Person Manager ( by Conventions )</s:a>
 								</li>
-							</ul>
+							</ul></li>
+
+						<li><a href="">关于</a>
 						</li>
-						
-						<li><a href="">关于</a></li>
 					</ul>
 
 
@@ -121,14 +129,16 @@
 						<%
 							if (request.getSession().getAttribute("username") == null) {
 						%>
-						<li><s:a action="user_register!registerIndex">用户注册</s:a></li>
-						<li><a href="user/user_login.jsp">登陆系统</a></li>
+						<li><s:a action="user_register!registerIndex">用户注册</s:a>
+						</li>
+						<li><a href="user/user_login.jsp">登陆系统</a>
+						</li>
 						<%
 							} else {
 						%>
-						<li> <s:a action="user_edit">修改资料</s:a></li>
-						<li>
-						<s:a action="user_logout">退出系统(<%=request.getSession().getAttribute("username")%>)</s:a>
+						<li><s:a action="user_edit">修改资料</s:a>
+						</li>
+						<li><s:a action="user_logout">退出系统(<%=request.getSession().getAttribute("username")%>)</s:a>
 						</li>
 						<%
 							}
@@ -138,11 +148,12 @@
 								class="caret"></b> </a>
 							<ul class="dropdown-menu">
 								<li><a href="http://struts.apache.org/2.x/docs/home.html"><i
-										class="icon-share"></i> 搜索条目</a></li>
+										class="icon-share"></i> 搜索条目</a>
+								</li>
 								<li><a href="http://struts.apache.org/2.x/docs/home.html"><i
-										class="icon-share"></i> 所有条目</a></li>
-							</ul>
-						</li>
+										class="icon-share"></i> 所有条目</a>
+								</li>
+							</ul></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -155,11 +166,16 @@
 
 	<hr>
 
-	<footer id="footer" class="footer">
-	<div class="pull-left">
-		Copyright &copy; 2003-2013 <a
-			href="http://www.localhost:8080/laughing-beer/"> 供应链 </a>
+	<div id="footer">
+		<div class="container">
+			<p class="muted credit">
+				Copyright &copy; 2003-2013 <a
+					href="http://www.localhost:8080/laughing-beer/"> 供应链 </a>
+			</p>
+			<p class="pull-right">
+				<a href="#">Back to top</a>
+			</p>
+		</div>
 	</div>
-	</footer>
 </body>
 </html>

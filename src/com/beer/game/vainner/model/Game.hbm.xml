@@ -16,5 +16,8 @@
         <property name="endTime" type="java.sql.Timestamp">
             <column name="end_time" length="19" />
         </property>
+        <property name="gameTitle" type="java.lang.String">
+            <column name="game_title" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

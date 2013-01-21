@@ -16,6 +16,7 @@ public class GameDAOTest {
 	{
 		GameDAO dao = new GameDAO();
 		Game game = new Game();
+		game.setGameTitle("hello");
 		game.setStartTime(new Timestamp(System.currentTimeMillis()));
 		game.setEndTime(new Timestamp(System.currentTimeMillis()));
 		dao.save(game);

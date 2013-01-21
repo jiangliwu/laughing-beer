@@ -16,7 +16,7 @@ public  class Game implements java.io.Serializable {
 	private Integer gameId;
 	private Timestamp startTime;
 	private Timestamp endTime;
-
+	private String gameTitle;
 
 	// Constructors
 
@@ -60,6 +60,14 @@ public  class Game implements java.io.Serializable {
 
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getGameTitle() {
+		return gameTitle;
+	}
+
+	public void setGameTitle(String gameTitle) {
+		this.gameTitle = gameTitle;
 	}
 
 }

@@ -36,6 +36,16 @@
     		<result name="success">/user/user_register_success.jsp</result>
     		<result name="error">/user/user_register.jsp</result>
     	</action>
+    	
+    	<action name="game_hall"  class="com.beer.game.vainner.action.GameHallAction">
+    		<result>/game/game_hall.jsp</result>
+    	</action>
+    	
+    	<action name="game_create" class="com.beer.game.vainner.action.GameCreateAction">
+    		<result name="index">/game/game_create.jsp</result>
+    		<result name="success">/game/game_create_success.jsp</result>
+    		<result name="error">/game/game_create.jsp</result>
+    	</action>
     </package>
     
 </struts>
