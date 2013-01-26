@@ -1,7 +1,6 @@
 package com.beer.game.vainner.model;
 
-public  class GameRetailParameter implements
-		java.io.Serializable {
+public class GameRetailParameter implements java.io.Serializable {
 
 	// Fields
 
@@ -121,4 +120,10 @@ public  class GameRetailParameter implements
 		this.gameId = gameId;
 	}
 
+	public String toString() {
+		return "retail config :" + this.price + " " + this.delayCost + " "
+				+ this.repertoryCost + " " + this.orderCost + " "
+				+ this.transportCost + " " + this.discount + " " + this.origin
+				+ " " + this.cost;
+	}
 }

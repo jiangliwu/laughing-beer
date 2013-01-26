@@ -7,11 +7,12 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.springframework.stereotype.Component;
 
 import com.beer.common.utility.BaseHibernateDAO;
 import com.beer.game.vainner.model.GameWholesaleParameter;
 
-
+@Component("gameWholesaleParameterDAO")
 public class GameWholesaleParameterDAO extends BaseHibernateDAO {
 	private static final Logger log = Logger
 			.getLogger(GameWholesaleParameterDAO.class);
@@ -30,9 +31,9 @@ public class GameWholesaleParameterDAO extends BaseHibernateDAO {
 		log.debug("saving TblGameWholesaleParameter instance");
 		Session session = this.getSession();
 		try {
-			session.beginTransaction();
+			
 			session.save(transientInstance);
-			session.getTransaction().commit();
+			
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);

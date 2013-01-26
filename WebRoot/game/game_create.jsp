@@ -26,12 +26,45 @@
 			<div class="row-fluid">
 				<div class="span8">
 
-					<s:form cssClass="form-horizontal" action="user_register!register">
+					<s:form cssClass="form-horizontal" action="game_create!create">
 
 						<div class="control-group">
-							<label class="control-label" for>房间标题</label>
-							<div id="" class="controls"> <s:textfield name="" /> </div>
+							<label class="control-label" >房间标题</label>
+							<div class="controls"> <s:textfield name="gameTitle" /> </div>
 						</div>
+						<div class="control-group">
+							<label class="control-label" >零售商人数</label>
+							<div class="controls"> <s:textfield name="retailNumber"  value="1"  readonly="true" /> </div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" >批发商人数</label>
+							<div class="controls"> <s:textfield name="wholesaleNumber" value="1" readonly="true" /> </div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" >生产商人数</label>
+							<div class="controls"> <s:textfield name="producerNumber" value="1" readonly="true" /> </div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" >游戏轮数</label>
+							<div class="controls"> <s:textfield name="times" value="50"/> </div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" >一轮的事件长度(秒)</label>
+							<div class="controls"> <s:textfield name="time" value="30"/> </div>
+						</div>
+						<div class="control-group offset2">
+
+							<div class="checkbox"> <s:checkbox name="needPassword" id="need-password">是否需要密码</s:checkbox> </div>
+						</div>
+						
+						<div class="control-group"  id="password-input" style="display:none">
+							<label class="control-label" >房间密码</label>
+							<div class="controls"> <s:textfield name="password"></s:textfield> </div>
+						</div>
+						
+						
+						
+						
 						<hr class="soften">
 						<p><a class="offset2" rel="tooltips" title="零售商的详细参数配置" href="#" id="retail-config">点击这里配置零售商的参数</a></p>
 						<div id="retail-input" style="display:none">

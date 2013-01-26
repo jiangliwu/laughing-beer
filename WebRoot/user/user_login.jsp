@@ -63,8 +63,8 @@
 						</div>
 						<div class="control-group">
 							<div class="controls">
-								<label class="checkbox"> <input type="checkbox"
-									name="remember"> 记住密码 </label>
+								<label class="checkbox"> <s:checkbox name="remember" value="a">记住密码</s:checkbox>
+									</label>
 								<button type="submit" class="btn">登录</button>
 							</div>
 						</div>

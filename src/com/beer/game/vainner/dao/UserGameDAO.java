@@ -6,13 +6,14 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.springframework.stereotype.Component;
 
 import com.beer.common.utility.BaseHibernateDAO;
 import com.beer.game.vainner.model.UserGame;
 
+@Component("userGameDAO")
 public class UserGameDAO extends BaseHibernateDAO {
-	private static final Logger log = Logger
-			.getLogger(UserGameDAO.class);
+	private static final Logger log = Logger.getLogger(UserGameDAO.class);
 	// property constants
 	public static final String GAME_ROLE = "gameRole";
 	public static final String GAME_HOLDER = "gameHolder";
@@ -35,9 +36,9 @@ public class UserGameDAO extends BaseHibernateDAO {
 		log.debug("deleting UserGame instance");
 		Session session = this.getSession();
 		try {
-			session.beginTransaction();
+
 			session.delete(persistentInstance);
-			session.getTransaction().commit();
+
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -110,8 +111,7 @@ public class UserGameDAO extends BaseHibernateDAO {
 	public UserGame merge(UserGame detachedInstance) {
 		log.debug("merging UserGame instance");
 		try {
-			UserGame result = (UserGame) getSession().merge(
-					detachedInstance);
+			UserGame result = (UserGame) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {

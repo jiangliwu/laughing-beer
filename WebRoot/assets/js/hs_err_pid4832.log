@@ -1,0 +1,217 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x6d7f9d39, pid=4832, tid=6736
+#
+# JRE version: 6.0_24-b07
+# Java VM: Java HotSpot(TM) Client VM (19.1-b02 mixed mode windows-x86 )
+# Problematic frame:
+# V  [jvm.dll+0x9d39]
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x02314800):  VMThread [stack: 0x34650000,0x34750000] [id=6736]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x00000068
+
+Registers:
+EAX=0x00000001, EBX=0x25ac5ca4, ECX=0x3b657469, EDX=0x00000000
+ESP=0x3474fadc, EBP=0x3474fadc, ESI=0x24382e40, EDI=0x3b657469
+EIP=0x6d7f9d39, EFLAGS=0x00010297
+
+Register to memory mapping:
+
+EAX=0x00000001
+0x00000001 is pointing to unknown location
+
+EBX=0x25ac5ca4
+{constant pool} 
+ - klass: {other class}
+ - cache: 0x25aca968
+ -   1 :  : "org.eclipse.ui.dnd.IDragAndDropService" {0x25acc6f8}
+ -   2 :  : 
+[error occurred during error reporting (printing registers, top of stack, instructions near pc), id 0xc0000005]
+
+Stack: [0x34650000,0x34750000],  sp=0x3474fadc,  free space=1022k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x9d39]
+V  [jvm.dll+0x9da7]
+V  [jvm.dll+0x9ddd]
+V  [jvm.dll+0x9ec8e]
+V  [jvm.dll+0x15e393]
+V  [jvm.dll+0x15e722]
+V  [jvm.dll+0x1e83e4]
+V  [jvm.dll+0x1a6d89]
+V  [jvm.dll+0xca430]
+V  [jvm.dll+0xcaca0]
+V  [jvm.dll+0xcb150]
+V  [jvm.dll+0xcf1ba]
+V  [jvm.dll+0x1de8a2]
+V  [jvm.dll+0xc9e88]
+V  [jvm.dll+0xca281]
+V  [jvm.dll+0x1fa9f4]
+V  [jvm.dll+0x1fd903]
+V  [jvm.dll+0x1fcbde]
+V  [jvm.dll+0x1fcf00]
+V  [jvm.dll+0x1fd302]
+V  [jvm.dll+0x18317c]
+C  [MSVCR71.dll+0x9565]
+C  [kernel32.dll+0x133aa]
+C  [ntdll.dll+0x39ef2]
+C  [ntdll.dll+0x39ec5]
+
+VM_Operation (0x0018e834): GenCollectForPermanentAllocation, mode: safepoint, requested by thread 0x00249c00
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x35e81800 JavaThread "Thread-2" [_thread_blocked, id=7888, stack(0x359c0000,0x35ac0000)]
+  0x35e78000 JavaThread "Worker-1" [_thread_blocked, id=7696, stack(0x368f0000,0x369f0000)]
+  0x35dfe000 JavaThread "Thread-1" [_thread_blocked, id=4912, stack(0x367f0000,0x368f0000)]
+  0x35d49800 JavaThread "Worker-0" [_thread_blocked, id=7364, stack(0x366f0000,0x367f0000)]
+  0x35c18c00 JavaThread "Worker-JM" [_thread_blocked, id=4668, stack(0x36090000,0x36190000)]
+  0x35055800 JavaThread "[Timer] - Main Queue Handler" daemon [_thread_blocked, id=6856, stack(0x35b00000,0x35c00000)]
+  0x3505a400 JavaThread "Framework Event Dispatcher" daemon [_thread_blocked, id=4612, stack(0x35880000,0x35980000)]
+  0x3505a000 JavaThread "Start Level Event Dispatcher" daemon [_thread_blocked, id=7912, stack(0x35740000,0x35840000)]
+  0x35039800 JavaThread "State Data Manager" daemon [_thread_blocked, id=1780, stack(0x35600000,0x35700000)]
+  0x34f85000 JavaThread "Framework Active Thread" [_thread_blocked, id=3976, stack(0x35500000,0x35600000)]
+  0x02354400 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=7376, stack(0x34cd0000,0x34dd0000)]
+  0x0232b400 JavaThread "CompilerThread0" daemon [_thread_blocked, id=6448, stack(0x34b90000,0x34c90000)]
+  0x0232a000 JavaThread "Attach Listener" daemon [_thread_blocked, id=7532, stack(0x34a50000,0x34b50000)]
+  0x02327000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=368, stack(0x34950000,0x34a50000)]
+  0x02319c00 JavaThread "Finalizer" daemon [_thread_blocked, id=8068, stack(0x34850000,0x34950000)]
+  0x02318800 JavaThread "Reference Handler" daemon [_thread_blocked, id=7568, stack(0x34750000,0x34850000)]
+  0x00249c00 JavaThread "main" [_thread_blocked, id=3408, stack(0x00090000,0x00190000)]
+
+Other Threads:
+=>0x02314800 VMThread [stack: 0x34650000,0x34750000] [id=6736]
+  0x0236d800 WatcherThread [stack: 0x34e10000,0x34f10000] [id=6312]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00247d10] Threads_lock - owner thread: 0x02314800
+[0x00248120] Heap_lock - owner thread: 0x00249c00
+
+Heap
+ def new generation   total 12352K, used 10937K [0x04380000, 0x050e0000, 0x0ee20000)
+  eden space 11008K,  94% used [0x04380000, 0x04d9ff80, 0x04e40000)
+  from space 1344K,  42% used [0x04f90000, 0x0501e510, 0x050e0000)
+  to   space 1344K,   0% used [0x04e40000, 0x04e40000, 0x04f90000)
+ tenured generation   total 27328K, used 13947K [0x0ee20000, 0x108d0000, 0x24380000)
+   the space 27328K,  51% used [0x0ee20000, 0x0fbbec58, 0x0fbbee00, 0x108d0000)
+ compacting perm gen  total 28672K, used 28671K [0x24380000, 0x25f80000, 0x34380000)
+   the space 28672K,  99% used [0x24380000, 0x25f7ffa8, 0x25f80000, 0x25f80000)
+No shared spaces configured.
+
+Dynamic libraries:
+0x00400000 - 0x0040d000 	g:\Aptana Studio 3\AptanaStudio3.exe
+0x77060000 - 0x771e0000 	C:\Windows\SysWOW64\ntdll.dll
+0x75920000 - 0x75a30000 	C:\Windows\syswow64\kernel32.dll
+0x75e70000 - 0x75eb7000 	C:\Windows\syswow64\KERNELBASE.dll
+0x766a0000 - 0x767a0000 	C:\Windows\syswow64\USER32.dll
+0x75cf0000 - 0x75d80000 	C:\Windows\syswow64\GDI32.dll
+0x75dd0000 - 0x75dda000 	C:\Windows\syswow64\LPK.dll
+0x760c0000 - 0x7615d000 	C:\Windows\syswow64\USP10.dll
+0x765c0000 - 0x7666c000 	C:\Windows\syswow64\msvcrt.dll
+0x75ff0000 - 0x76090000 	C:\Windows\syswow64\ADVAPI32.dll
+0x75470000 - 0x75489000 	C:\Windows\SysWOW64\sechost.dll
+0x75710000 - 0x75800000 	C:\Windows\syswow64\RPCRT4.dll
+0x74740000 - 0x747a0000 	C:\Windows\syswow64\SspiCli.dll
+0x74730000 - 0x7473c000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x71f90000 - 0x72014000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7601.17514_none_ec83dffa859149af\COMCTL32.dll
+0x75410000 - 0x75470000 	C:\Windows\system32\IMM32.DLL
+0x755b0000 - 0x7567c000 	C:\Windows\syswow64\MSCTF.dll
+0x00220000 - 0x0022d000 	g:\Aptana Studio 3\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.100.v20110502\eclipse_1406.dll
+0x744e0000 - 0x744e9000 	C:\Windows\system32\VERSION.dll
+0x72570000 - 0x725f0000 	C:\Windows\system32\uxtheme.dll
+0x6e860000 - 0x6e8b8000 	C:\Program Files (x86)\Common Files\microsoft shared\ink\tiptsf.dll
+0x763a0000 - 0x764fc000 	C:\Windows\syswow64\ole32.dll
+0x75f20000 - 0x75faf000 	C:\Windows\syswow64\OLEAUT32.dll
+0x6d7f0000 - 0x6da96000 	g:\Aptana Studio 3\jre\bin\client\jvm.dll
+0x72770000 - 0x727a2000 	C:\Windows\system32\WINMM.dll
+0x7c340000 - 0x7c396000 	C:\Windows\system32\MSVCR71.dll
+0x71c00000 - 0x71c4c000 	C:\Windows\system32\apphelp.dll
+0x6d7a0000 - 0x6d7ac000 	g:\Aptana Studio 3\jre\bin\verify.dll
+0x6d320000 - 0x6d33f000 	g:\Aptana Studio 3\jre\bin\java.dll
+0x6d280000 - 0x6d288000 	g:\Aptana Studio 3\jre\bin\hpi.dll
+0x76170000 - 0x76175000 	C:\Windows\syswow64\PSAPI.DLL
+0x6d7e0000 - 0x6d7ef000 	g:\Aptana Studio 3\jre\bin\zip.dll
+0x721d0000 - 0x721e6000 	C:\Windows\system32\CRYPTSP.dll
+0x71f50000 - 0x71f8b000 	C:\Windows\system32\rsaenh.dll
+0x73f90000 - 0x73fa7000 	C:\Windows\system32\USERENV.dll
+0x73f80000 - 0x73f8b000 	C:\Windows\system32\profapi.dll
+0x6d600000 - 0x6d613000 	G:\Aptana Studio 3\jre\bin\net.dll
+0x75fb0000 - 0x75fe5000 	C:\Windows\syswow64\WS2_32.dll
+0x77030000 - 0x77036000 	C:\Windows\syswow64\NSI.dll
+0x722d0000 - 0x7230c000 	C:\Windows\system32\mswsock.dll
+0x716b0000 - 0x716b6000 	C:\Windows\System32\wship6.dll
+0x6e6f0000 - 0x6e700000 	C:\Windows\system32\NLAapi.dll
+0x6e6e0000 - 0x6e6f0000 	C:\Windows\system32\napinsp.dll
+0x6e6c0000 - 0x6e6d2000 	C:\Windows\system32\pnrpnsp.dll
+0x718c0000 - 0x71904000 	C:\Windows\system32\DNSAPI.dll
+0x6e6b0000 - 0x6e6b8000 	C:\Windows\System32\winrnr.dll
+0x71910000 - 0x71915000 	C:\Windows\System32\wshtcpip.dll
+0x71cb0000 - 0x71ccc000 	C:\Windows\system32\IPHLPAPI.DLL
+0x71ca0000 - 0x71ca7000 	C:\Windows\system32\WINNSI.DLL
+0x6e6a0000 - 0x6e6a6000 	C:\Windows\system32\rasadhlp.dll
+0x6e660000 - 0x6e698000 	C:\Windows\System32\fwpuclnt.dll
+0x76500000 - 0x76583000 	C:\Windows\syswow64\CLBCatQ.DLL
+0x71d30000 - 0x71d6c000 	C:\Windows\system32\oleacc.dll
+0x6d620000 - 0x6d629000 	G:\Aptana Studio 3\jre\bin\nio.dll
+0x36190000 - 0x361fe000 	G:\Aptana Studio 3\configuration\org.eclipse.osgi\bundles\235\1\.cp\swt-win32-3740.dll
+0x75680000 - 0x756fb000 	C:\Windows\syswow64\comdlg32.dll
+0x76340000 - 0x76397000 	C:\Windows\syswow64\SHLWAPI.dll
+0x71a60000 - 0x71bfe000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2\COMCTL32.dll
+0x747c0000 - 0x7540a000 	C:\Windows\syswow64\SHELL32.dll
+0x727b0000 - 0x72801000 	C:\Windows\system32\WINSPOOL.DRV
+0x75800000 - 0x7591b000 	C:\Windows\syswow64\WININET.dll
+0x75700000 - 0x75703000 	C:\Windows\syswow64\Normaliz.dll
+0x76180000 - 0x76338000 	C:\Windows\syswow64\iertutil.dll
+0x75490000 - 0x755a1000 	C:\Windows\syswow64\urlmon.dll
+0x75bd0000 - 0x75ced000 	C:\Windows\syswow64\CRYPT32.dll
+0x76160000 - 0x7616c000 	C:\Windows\syswow64\MSASN1.dll
+0x72550000 - 0x72563000 	C:\Windows\system32\dwmapi.dll
+0x6ea20000 - 0x6eb15000 	C:\Windows\system32\propsys.dll
+0x35360000 - 0x3537d000 	G:\Aptana Studio 3\configuration\org.eclipse.osgi\bundles\235\1\.cp\swt-gdip-win32-3740.dll
+0x71dc0000 - 0x71f50000 	C:\Windows\WinSxS\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7601.17825_none_72d273598668a06b\gdiplus.dll
+0x728b0000 - 0x729ab000 	C:\Windows\system32\WindowsCodecs.dll
+0x36290000 - 0x3629e000 	G:\Aptana Studio 3\configuration\org.eclipse.osgi\bundles\146\1\.cp\os\win32\x86\localfile_1_0_0.dll
+0x362b0000 - 0x362b8000 	G:\Aptana Studio 3\configuration\org.eclipse.osgi\bundles\151\1\.cp\os\win32\x86\win32refresh.dll
+0x68e20000 - 0x68f8f000 	C:\Windows\system32\explorerframe.dll
+0x68df0000 - 0x68e1f000 	C:\Windows\system32\DUser.dll
+0x68d30000 - 0x68de2000 	C:\Windows\system32\DUI70.dll
+0x6eb60000 - 0x6eb6e000 	C:\Windows\system32\RpcRtRemote.dll
+0x71560000 - 0x7158e000 	C:\Windows\system32\mlang.dll
+
+VM Arguments:
+jvm_args: -Xms40m -Xmx512m -Declipse.p2.unsignedPolicy=allow -Declipse.log.size.max=10000 -Declipse.log.backup.max=5 -Djava.awt.headless=true -XX:MaxPermSize=256m 
+java_command: <unknown>
+Launcher Type: generic
+
+Environment Variables:
+PATH=g:/Aptana Studio 3/jre/bin/client;g:/Aptana Studio 3/jre/bin;g:/Aptana Studio 3/jre/lib/i386;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;G:\xampp\mysql\bin;F:\dev\android-sdk-windows\platform-tools;G:\xampp\php;G:\xampp\mysql\bin;C:\Program Files (x86)\VisualSVN\bin;C:\Program Files\SlikSvn\bin;F:\Java\jdk1.7.0_07\bin;C:\strawberry\c\bin;C:\strawberry\perl\site\bin;C:\strawberry\perl\bin;F:\Workspaces\MyEclipse 10\laughing-beer\WebRoot\assets\js;
+USERNAME=Administrator
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 37 Stepping 2, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7601 Service Pack 1
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 37 stepping 2, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht
+
+Memory: 4k page, physical 10418228k(6380892k free), swap 20834604k(16588492k free)
+
+vm_info: Java HotSpot(TM) Client VM (19.1-b02) for windows-x86 JRE (1.6.0_24-b07), built on Feb  2 2011 17:44:41 by "java_re" with MS VC++ 7.1 (VS2003)
+
+time: Mon Jan 21 17:25:20 2013
+elapsed time: 5 seconds
+

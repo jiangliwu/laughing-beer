@@ -16,27 +16,41 @@ public  class Game implements java.io.Serializable {
 	private Integer gameId;
 	private Timestamp startTime;
 	private Timestamp endTime;
+	private Timestamp createTime;
 	private String gameTitle;
-
-	// Constructors
-
-	/** default constructor */
-	public Game() {
-	}
-
-	/** minimal constructor */
-	public Game(Timestamp startTime) {
-		this.startTime = startTime;
-	}
-
-	/** full constructor */
-	public Game(Timestamp startTime, Timestamp endTime) {
-		this.startTime = startTime;
-		this.endTime = endTime;
-		
-	}
+	private String gamePassword;
+	private int gameStauts;
+	private int allTimes;
+	private int onceTime;
+	private int retailNumber;
+	private int wholesaleNumber;
+	private int producerNumber;
 
 	// Property accessors
+
+	public int getRetailNumber() {
+		return retailNumber;
+	}
+
+	public void setRetailNumber(int retailNumber) {
+		this.retailNumber = retailNumber;
+	}
+
+	public int getWholesaleNumber() {
+		return wholesaleNumber;
+	}
+
+	public void setWholesaleNumber(int wholesaleNumber) {
+		this.wholesaleNumber = wholesaleNumber;
+	}
+
+	public int getProducerNumber() {
+		return producerNumber;
+	}
+
+	public void setProducerNumber(int producerNumber) {
+		this.producerNumber = producerNumber;
+	}
 
 	public Integer getGameId() {
 		return this.gameId;
@@ -68,6 +82,46 @@ public  class Game implements java.io.Serializable {
 
 	public void setGameTitle(String gameTitle) {
 		this.gameTitle = gameTitle;
+	}
+
+	public String getGamePassword() {
+		return gamePassword;
+	}
+
+	public void setGamePassword(String gamePassword) {
+		this.gamePassword = gamePassword;
+	}
+
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getGameStauts() {
+		return gameStauts;
+	}
+
+	public void setGameStauts(int gameStauts) {
+		this.gameStauts = gameStauts;
+	}
+
+	public int getAllTimes() {
+		return allTimes;
+	}
+
+	public void setAllTimes(int allTimes) {
+		this.allTimes = allTimes;
+	}
+
+	public int getOnceTime() {
+		return onceTime;
+	}
+
+	public void setOnceTime(int onceTime) {
+		this.onceTime = onceTime;
 	}
 
 }

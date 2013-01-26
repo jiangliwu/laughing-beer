@@ -9,20 +9,12 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.springframework.stereotype.Component;
 
 
-/**
- * A data access object (DAO) providing persistence and search support for
- * TblGameProducerRecord entities. Transaction control of the save(), update()
- * and delete() operations can directly support Spring container-managed
- * transactions or they can be augmented to handle user-managed Spring
- * transactions. Each of these methods provides additional information for how
- * to configure it for the desired type of transaction control.
- * 
- * @see com.vainner.GameProducerRecord.TblGameProducerRecord
- * @author MyEclipse Persistence Tools
- */
 
+
+@Component("gameProducerRecordDAO")
 public class GameProducerRecordDAO extends BaseHibernateDAO {
 	private static final Logger log = Logger
 			.getLogger(GameProducerRecordDAO.class);
@@ -46,9 +38,9 @@ public class GameProducerRecordDAO extends BaseHibernateDAO {
 		log.debug("saving TblGameProducerRecord instance");
 		Session session = this.getSession();
 		try {
-			session.beginTransaction();
+			
 			session.save(transientInstance);
-			session.getTransaction().commit();
+			
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);

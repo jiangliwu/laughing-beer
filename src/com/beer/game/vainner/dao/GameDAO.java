@@ -1,17 +1,23 @@
 package com.beer.game.vainner.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.springframework.stereotype.Component;
 
 import com.beer.common.utility.BaseHibernateDAO;
 import com.beer.game.vainner.model.Game;
 
+
+@Component("gameDAO")
 public class GameDAO extends BaseHibernateDAO {
 	private static final Logger log = Logger.getLogger(GameDAO.class);
+	public static final String GAME_TITLE = "gameTitle";
+	public static final String GAME_STAUTS = "gameStauts";
 
 	// property constants
 
@@ -19,9 +25,8 @@ public class GameDAO extends BaseHibernateDAO {
 		log.debug("saving Game instance");
 		Session session = this.getSession();
 		try {
-			session.beginTransaction();
 			session.save(transientInstance);
-			session.getTransaction().commit();
+			log.debug(transientInstance.getGameTitle());
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
@@ -47,7 +52,7 @@ public class GameDAO extends BaseHibernateDAO {
 		log.debug("getting Game instance with id: " + id);
 		try {
 			Game instance = (Game) getSession()
-					.get("com.vainner.game.Game", id);
+					.get("com.beer.game.vainner.model.Game", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

@@ -112,5 +112,12 @@ public  class GameProducerParameter implements
 	public void setGameId(Integer gameId) {
 		this.gameId = gameId;
 	}
-
+	
+	
+	public String toString() {
+		return "producer config :" + this.price + " " + this.delayCost + " "
+				+ this.repertoryCost + " " + this.startCost + " "
+				+ " " + this.discount + " " + this.origin
+				+ " " + this.cost;
+	}
 }

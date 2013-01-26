@@ -120,5 +120,10 @@ public  class GameWholesaleParameter implements
 	public void setGameId(Integer gameId) {
 		this.gameId = gameId;
 	}
-
+	public String toString() {
+		return "wholesale config :" + this.price + " " + this.delayCost + " "
+				+ this.repertoryCost + " " + this.orderCost + " "
+				+ this.transportCost + " " + this.discount + " " + this.origin
+				+ " " + this.cost;
+	}
 }

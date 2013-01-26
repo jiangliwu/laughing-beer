@@ -17,6 +17,8 @@
 
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
+		<property name="connection.useUnicode">true</property>
+		<property name="connection.characterEncoding">UTF-8</property>
 		<mapping class="com.beer.user.vainner.model.User" />
 		<mapping resource="com/beer/game/vainner/model/Game.hbm.xml" />
 

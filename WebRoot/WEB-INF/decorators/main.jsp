@@ -19,7 +19,7 @@
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
-
+<%@taglib prefix="sx" uri="/struts-dojo-tags" %>
 <html lang="en">
 <head>
 <base href="<%=basePath%>">
@@ -73,8 +73,9 @@
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-
+<sx:head />
 <decorator:head />
+
 </head>
 
 <body id="page-home" onload="prettyPrint();">

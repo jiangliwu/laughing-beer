@@ -19,7 +19,7 @@ public class GameDAOTest {
 		game.setGameTitle("hello");
 		game.setStartTime(new Timestamp(System.currentTimeMillis()));
 		game.setEndTime(new Timestamp(System.currentTimeMillis()));
-		dao.save(game);
+		dao.save(game); 
 		
 		List<?> list =  dao.findAll();
 		for (int i = 0 ; i < list.size() ; i++)

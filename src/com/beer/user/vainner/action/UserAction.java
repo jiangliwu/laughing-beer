@@ -26,6 +26,7 @@ public class UserAction extends ActionSupport {
 		UserService userService = (UserService) ApplicationContextHolder
 				.getApplicationContext().getBean("userService");
 		String result =  userService.login(username, password);
+		log.debug(remember);
 		if (result.equals("success"))
 		{
 			ActionContext.getContext().getSession()
