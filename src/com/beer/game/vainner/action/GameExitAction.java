@@ -3,6 +3,10 @@ package com.beer.game.vainner.action;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
+import com.beer.common.utility.ApplicationContextHolder;
+import com.beer.game.vainner.service.GameDeleteService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,6 +19,7 @@ public class GameExitAction extends ActionSupport {
 	private int id;
 	private Map<String, Object> session;
 	private Map<String, Object> applicationData;
+	private static Logger log = Logger.getLogger(GameExitAction.class);
 
 	public GameExitAction() {
 		this.setSession(ActionContext.getContext().getSession());
@@ -23,6 +28,7 @@ public class GameExitAction extends ActionSupport {
 
 	@SuppressWarnings("unchecked")
 	public String execute() {
+
 		String applicationDataKey = "room" + this.getId();
 
 		Map<String, Object> gameInformation = (Map<String, Object>) this
@@ -34,8 +40,8 @@ public class GameExitAction extends ActionSupport {
 		List<String> producer = (List<String>) gameInformation.get("producer");
 		List<String> message = (List<String>) gameInformation.get("message");
 		String username = (String) this.getSession().get("username");
+		log.debug(username + " " + applicationDataKey + " " + "退出房间!");
 
-		
 		retail.remove(username);
 		wholesale.remove(username);
 		producer.remove(username);
@@ -43,7 +49,7 @@ public class GameExitAction extends ActionSupport {
 		message.add(username + "离开了房间!");
 		if (username.equals(gameInformation.get("holder"))) // 房主离开了
 		{
-			
+
 			String flagName = "";
 			if (retail.size() != 0) {
 				gameInformation.put("holder", retail.get(0));
@@ -57,7 +63,13 @@ public class GameExitAction extends ActionSupport {
 			}
 			message.add(flagName + "成为了新的房主!");
 		}
-		
+
+		if (retail.size() + wholesale.size() + producer.size() == 0) {
+			gameInformation.put(applicationDataKey, null);
+			GameDeleteService gameDeleteService = (GameDeleteService) ApplicationContextHolder
+					.getApplicationContext().getBean("gameDeleteService");
+			gameDeleteService.deleteGameById(this.getId());
+		}
 		return "success";
 	}
 
