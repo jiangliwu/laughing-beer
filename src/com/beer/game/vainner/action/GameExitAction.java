@@ -88,6 +88,8 @@ public class GameExitAction extends ActionSupport {
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+	
+	
 
 	public Map<String, Object> getApplicationData() {
 		return applicationData;

@@ -15,7 +15,7 @@
 		Integer wholesaleNumber = null;
 		Integer producerNumber = null;
 		String holder = null;
-		
+		boolean  start = null;
 		if (gameInformation != null) {
 			 retail = (List) gameInformation.get("retail");
 			 wholesale = (List) gameInformation.get("wholesale");
@@ -29,6 +29,7 @@
 					.get("producerNumber");
 
 			 holder = (String) gameInformation.get("holder");
+			 start = (boolean)gameInformation.get("start");
 		}
 	%>
 
@@ -213,11 +214,13 @@
 			
 	</table>
 	<%
+
 		if (session.getAttribute("username").equals(holder)) {
 		if(retail.size() == retailNumber && wholesale.size() == wholesaleNumber && producer.size() == producerNumber)
 		{
 		%>
-				<form action="" method="post">
+				<form action="game_start" method="post">
+				<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary offset3">开始游戏</button>
 					</div>

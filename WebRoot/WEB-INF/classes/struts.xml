@@ -49,7 +49,9 @@
     	<action name="game_wait" class="com.beer.game.vainner.action.GameWaitAction">
     		<result name="index">/game/game_wait.jsp</result>
     	</action>
-    	
+    	<action name="game_start" class="com.beer.game.vainner.action.GameStartAction">
+    		<result name="success">/game/game_play.jsp</result>
+    	</action>
     	
     	<action name="game_switch" class="com.beer.game.vainner.action.GameSwitchIdentify">
     		<result name="success" type="redirect">game_wait!index?id=${id}</result>

@@ -103,6 +103,7 @@ public class GameCreateAction extends ActionSupport {
 			gameInformation.put("producerNumber",
 					new Integer(game.getProducerNumber()));
 			gameInformation.put("message", message);
+			gameInformation.put("start", false);
 			this.getApplicationData().put(applicationDataKey, gameInformation); // 写入信息
 			this.setGameId(game.getGameId());
 			return "success";
