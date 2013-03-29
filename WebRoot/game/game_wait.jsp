@@ -7,6 +7,7 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib uri="/struts-dojo-tags" prefix="sx"%>
 <script type="text/javascript">
+/*
 	window.onbeforeunload = function() {
 	
 		
@@ -28,6 +29,7 @@
 		}
 		alert("你已离开房间!");
 	};
+	*/
 </script>
 </head>
 <body>

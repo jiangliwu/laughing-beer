@@ -3,8 +3,10 @@
 <html>
 <head>
 <title>Laughing-beer 首页</title>
+
 </head>
 <body>
+
 
 
 	<div class="container">
@@ -25,6 +27,7 @@
 				</div>
 
 			</div>
+			
 		</div>
 	</div>
 </body>

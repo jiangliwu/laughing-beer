@@ -26,7 +26,8 @@ public class GameStartAction extends ActionSupport {
 
 		Map<String, Object> gameInformation = (Map<String, Object>) this
 				.getApplicationData().get(applicationDataKey); // 读出房间信息
-		gameInformation.put("start", true);
+		if(gameInformation != null)
+			gameInformation.put("start", true);
 		return "success";
 	}
 

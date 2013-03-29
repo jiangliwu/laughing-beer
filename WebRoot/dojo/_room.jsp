@@ -15,7 +15,7 @@
 		Integer wholesaleNumber = null;
 		Integer producerNumber = null;
 		String holder = null;
-		boolean  start = null;
+		Boolean  start = null;
 		if (gameInformation != null) {
 			 retail = (List) gameInformation.get("retail");
 			 wholesale = (List) gameInformation.get("wholesale");
@@ -29,7 +29,7 @@
 					.get("producerNumber");
 
 			 holder = (String) gameInformation.get("holder");
-			 start = (boolean)gameInformation.get("start");
+			 start = (Boolean)gameInformation.get("start");
 		}
 	%>
 
@@ -213,21 +213,42 @@
 		</tbody>
 			
 	</table>
+	
+	<form action="game_start" method="post" id="startform">
+		<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
+		<div class="form-actions">
+			<button type="submit" id="start-button" class="btn btn-primary offset3">开始游戏</button>
+		</div>
+	</form>
+	
+	<script type="text/javascript">
+	 document.startform.Submit.disabled=true;
+	</script>
 	<%
+	if(start)
+	{
+		%>
+	
+		
+		<%	
+	}
 
 		if (session.getAttribute("username").equals(holder)) {
+		%>
+				
+				<%
 		if(retail.size() == retailNumber && wholesale.size() == wholesaleNumber && producer.size() == producerNumber)
 		{
 		%>
-				<form action="game_start" method="post">
-				<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
-					<div class="form-actions">
-						<button type="submit" class="btn btn-primary offset3">开始游戏</button>
-					</div>
-				</form>
+				
+				
 		<%
 		}}
-		%>
+		else {
+			%>
+			
+			
+		<%} %>
 	<%
 		}
 	%>
