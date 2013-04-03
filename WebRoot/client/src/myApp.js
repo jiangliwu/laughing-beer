@@ -109,7 +109,17 @@ var Helloworld = cc.Layer.extend({
         this.circle.schedule(this.circle.myUpdate, 1 / 60);
 
         this.helloLabel.runAction(cc.MoveBy.create(2.5, cc.p(0, size.height - 40)));
-
+        
+        var linkAjax =  "dojo/room/_room_is_start.jsp?id=" + 141;
+		   $.ajax({
+			   type:"GET", 
+			   url:linkAjax,             
+			   success:function(data){
+			   		var value = data.split(",")[1];
+			   		cc.log(value);
+			   }
+		   });
+		   
         this.setTouchEnabled(true);
         this.adjustSizeForWindow();
         lazyLayer.adjustSizeForCanvas();

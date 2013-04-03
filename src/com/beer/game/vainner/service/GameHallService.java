@@ -28,9 +28,10 @@ public class GameHallService {
 		this.getGameDAO();
 		List<?> result = this.getGameDAO().findByProperty(GameDAO.GAME_STAUTS,
 				0);
+		
 		Map<String, Object> applicationData = ActionContext.getContext()
 				.getApplication();
-
+		
 		Iterator it = result.iterator();
 		List buffer = new LinkedList();
 		while (it.hasNext()) {
@@ -41,7 +42,7 @@ public class GameHallService {
 				buffer.add(game);
 			}
 		}
-
+		log.debug("需要删除的房间有 " + buffer.size() );
 		it = buffer.iterator();	//	删除
 		while (it.hasNext()) {
 			Game game = (Game) it.next();

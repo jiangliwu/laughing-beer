@@ -49,36 +49,52 @@
 									<td>${g.producerNumber}</td>
 									<td>${g.retailNumber+g.wholesaleNumber + g.producerNumber}</td>
 								</tr>
+								
 								<tr>
 									<td>实际人数</td>
 									<td>
-										<s:url id="urlRetailNumber" value="dojo/hall/_retail.jsp" >
-											<s:param name="id" >${g.gameId}</s:param>
-										</s:url>
-										<sx:div updateFreq="1500" href="%{#urlRetailNumber}" errorText="信息加载中" ></sx:div>
+										<div id="person-0"></div>
 									</td>
 									<td>
-										<s:url id="urlWholesaleNumber" value="dojo/hall/_wholesale.jsp" >
-											<s:param name="id" >${g.gameId}</s:param>
-										</s:url>
-										<sx:div updateFreq="1500" href="%{#urlWholesaleNumber}" errorText="信息加载中" ></sx:div>
+										<div id="person-1"></div>
 									</td>
-									
-									<td><s:url id="urlProducerNumber" value="dojo/hall/_producer.jsp" >
-											<s:param name="id" >${g.gameId}</s:param>
-										</s:url>
-										<sx:div updateFreq="1500" href="%{#urlProducerNumber}" errorText="信息加载中" ></sx:div>
-										</td>
-										
-									<td><s:url id="urlTotalNumber" value="dojo/hall/_total.jsp" >
-											<s:param name="id" >${g.gameId}</s:param>
-										</s:url>
-										<sx:div updateFreq="1500" href="%{#urlTotalNumber}" errorText="信息加载中" ></sx:div>
+									<td>
+										<div id="person-2"></div>
+									</td>
+									<td>
+										<div id="person-sum"></div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-					
+						
+						<div id="room-id" style="display:none;">${g.gameId}</div>
+						<script type="text/javascript">
+						window.setInterval(getTable,1000);
+						var roomid = document.getElementById("room-id").innerHTML;
+						function getTable()
+						{
+							var linkAjax = "dojo/hall/_total.jsp?id="+roomid+"&cache="+new Date().getTime();
+							   $.ajax({
+								   type:"GET", 
+								   url:linkAjax,             
+								   success:function(data){
+								   		var numbers = data.split(",");
+								   		var sum = 0;
+								   		for(var i = 0 ; i < numbers.length ; i++)
+								   		{
+								   			sum += parseInt(numbers[i]);
+								   			var tag = "person-"+i;
+								   			document.getElementById(tag).innerHTML = numbers[i];
+								   		}
+								   		document.getElementById("person-sum").innerHTML = sum;
+								   }
+							   });
+						}
+						</script>
+						
+						
+						
 						<form action="game_wait!index">
 						<input type="hidden" name="id" value=${g.gameId}>
 						<button type="submit" class="btn btn-primary offset9">加入游戏</button>

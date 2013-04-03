@@ -7,7 +7,7 @@
 		String applicationDataKey = "room" + request.getParameter("id");
 		Map gameInformation = (Map) application
 				.getAttribute(applicationDataKey);
-		out.print(applicationDataKey);
+				
 		List retail = null;
 		List wholesale = null;
 		List producer = null;
@@ -66,7 +66,7 @@
 									<form action="game_exit" namespace="/">
 										<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 										<s:submit cssClass="btn btn-danger" value="退出房间"></s:submit>
-									<form>
+									</form>
 									<%
 								} else {
 									%>
@@ -214,33 +214,29 @@
 			
 	</table>
 	
-	<form action="game_start" method="post" id="startform">
-		<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
-		<div class="form-actions">
-			<button type="submit" id="start-button" class="btn btn-primary offset3">开始游戏</button>
-		</div>
-	</form>
 	
-	<script type="text/javascript">
-	 document.startform.Submit.disabled=true;
-	</script>
+	
+	
+
 	<%
 	if(start)
 	{
-		%>
-	
-		
+		%>		
 		<%	
 	}
 
 		if (session.getAttribute("username").equals(holder)) {
-		%>
-				
+		%>		
 				<%
 		if(retail.size() == retailNumber && wholesale.size() == wholesaleNumber && producer.size() == producerNumber)
 		{
 		%>
-				
+				<form action="game_start" method="post" id="startform" name="startform">
+				<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
+				<div class="form-actions">
+					<button type="button" id="start-button" class="btn btn-primary offset3" onclick="selfSubmit()">开始游戏</button>
+				</div>
+				</form>
 				
 		<%
 		}}

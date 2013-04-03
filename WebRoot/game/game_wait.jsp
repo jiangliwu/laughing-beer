@@ -6,35 +6,8 @@
 <title>Laughing-beer - 游戏大厅</title>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib uri="/struts-dojo-tags" prefix="sx"%>
-<script type="text/javascript">
-/*
-	window.onbeforeunload = function() {
-	
-		
-		var roomid = document.getElementById("roomid").innerHTML.split(":")[1];	
-		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.onreadystatechange = function() {
-			if (xmlHttp.readyState == 4) {
-				if ((xmlHttp.status >= 200 && xmlHttp.status < 300)
-						|| xmlHttp.status == 304) {
-						
-				}
-			}
-		};
-		xmlHttp.open("GET", "game_exit?id=" + roomid, true);	
-		xmlHttp.send();
-		if(	window.navigator.userAgent.indexOf("Chrome") !== -1)		//谷歌浏览器的bug1
-		{
-			return "是否离开房间 ? ";
-		}
-		alert("你已离开房间!");
-	};
-	*/
-</script>
 </head>
 <body>
-
-
 
 	<div class="container">
 		<ul class="breadcrumb">
@@ -43,27 +16,61 @@
 			<li class="active"><div id="roomid">房间:${id}</div>
 			</li>
 		</ul>
-
 		<div class="span7">
-			<s:url id="url" value="dojo/_room.jsp">
-				<s:param name="id">
-					<s:property value="id" />
-				</s:param>
-			</s:url>
-			<sx:div updateFreq="1500" href="%{#url}" errorText="信息加载中"></sx:div>
+			<div id="user-list"></div>
 		</div>
 
 		<div class="span4">
-			<s:url id="url2" value="dojo/_message.jsp">
-				<s:param name="id">
-					<s:property value="id" />
-				</s:param>
-			</s:url>
-			<sx:div updateFreq="1500" href="%{#url2}" errorText="信息加载中"></sx:div>
+			<div id="user-message"></div>
 		</div>
 	</div>
-
-
+	
+	<script type="text/javascript">
+	window.setInterval(getTable,2000);
+	window.setInterval(getMessage,2000);
+	window.setInterval(getStartResult,2000);
+	function getTable()
+	{
+		var id = <%= request.getParameter("id") %>;
+		var linkAjax = "dojo/_room.jsp?id="+id+"&cache="+new Date().getTime();
+		   $.ajax({
+			   type:"GET", 
+			   url:linkAjax,             
+			   success:function(data){
+			   		$("#user-list").html(decodeURI(data));
+			   }
+		   });
+	}
+	
+	function getMessage()
+	{
+		var id = <%= request.getParameter("id") %>;
+		var linkAjax = "dojo/_message.jsp?id="+id+"&cache="+new Date().getTime();
+		   $.ajax({
+			   type:"GET", 
+			   url:linkAjax,             
+			   success:function(data){
+			   		$("#user-message").html(decodeURI(data));
+			   }
+		   });
+	}
+	function getStartResult()
+	{		
+		var id = <%= request.getParameter("id") %>;
+		var linkGoto = "game_start?id="+id;
+		var linkAjax =  "dojo/room/_room_is_start.jsp?id="+id+"&cache="+new Date().getTime();
+		   $.ajax({
+			   type:"GET", 
+			   url:linkAjax,             
+			   success:function(data){
+			   		var returnValue = data.split(",")[1];
+					if(returnValue == "true")
+						window.location.href = linkGoto;
+			   }
+		   });
+	}
+	
+	</script>
 
 </body>
 

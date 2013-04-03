@@ -11,7 +11,10 @@
 		retail = (List) gameInformation.get("retail");
 		wholesale = (List) gameInformation.get("wholesale");
 		producer = (List) gameInformation.get("producer");
-		if (retail != null && wholesale != null && producer != null)
-			out.print(retail.size() + wholesale.size() + producer.size());
+		String personNumber = "";
+		personNumber += retail==null ? 0 : retail.size() + ",";
+		personNumber += wholesale==null ? 0 : wholesale.size() + ",";
+		personNumber += producer==null ? 0 : producer.size();
+		out.print(personNumber);
 	}
 %>

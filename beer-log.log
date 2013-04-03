@@ -96,4 +96,28 @@ DEBUG main com.beer.user.vainner.dao.UserDAOImpl - finding User instance with pr
    WARN main org.hibernate.hql.internal.ast.HqlSqlWalker - [DEPRECATION] Encountered positional parameter near line 1, column 70.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
    DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl 开始删除 null
    DEBUG main com.beer.user.vainner.dao.UserDAOImpl - UserDAOImpl delete errorjava.lang.IllegalArgumentException: attempt to create delete event with null entity
+   DEBUG main com.beer.game.vainner.dao.GameDAO - saving Game instance
+   INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+   INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
+   INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+   INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+   INFO main org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/Game.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/UserGame.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameProducerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesaleParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameWholesalerRecord.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000221: Reading mappings from resource: com/beer/game/vainner/model/GameRetailParameter.hbm.xml
+   INFO main org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
+   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20
+   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000006: Autocommit mode: false
+   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/beer]
+   INFO main org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000046: Connection properties: {useUnicode=true, user=root, password=****, characterEncoding=UTF-8}
+   INFO main org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+   INFO main org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
+   INFO main org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
    
