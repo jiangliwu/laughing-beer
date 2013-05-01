@@ -81,21 +81,22 @@ var Helloworld = cc.Layer.extend({
         // 3. add your codes below...
         // add a label shows "Hello World"
         // create and initialize a label
-        this.helloLabel = cc.LabelTTF.create("Hello World", "Arial", 38);
+        this.helloLabel = cc.LabelTTF.create("游戏正在制作中......", "Arial", 38);
         // position the label on the center of the screen
         this.helloLabel.setPosition(cc.p(size.width / 2, 0));
+        this.helloLabel.setColor(new cc.Color3B(255,0,0));
         // add the label as a child to this layer
         this.addChild(this.helloLabel, 5);
 
         var lazyLayer = new cc.LazyLayer();
         this.addChild(lazyLayer);
-
+        
         // add "HelloWorld" splash screen"
         this.sprite = cc.Sprite.create("res/HelloWorld.png");
         this.sprite.setPosition(cc.p(size.width / 2, size.height / 2));
         this.sprite.setScale(0.5);
         this.sprite.setRotation(180);
-
+        
         lazyLayer.addChild(this.sprite, 0);
 
         var rotateToA = cc.RotateTo.create(2, 0);
