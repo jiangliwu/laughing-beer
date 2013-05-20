@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
 import com.beer.common.utility.SessionFactoryHolder;

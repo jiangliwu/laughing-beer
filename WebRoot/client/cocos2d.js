@@ -14,7 +14,10 @@
         SingleEngineFile:prefix+'Cocos2d-html5-v2.1.1.min.js',
         appFiles:[
             prefix+'src/resource.js',
-            prefix+'src/myApp.js'//add your own files in order here
+            prefix+'src/myApp.js',
+            prefix+'src/Mediator.js',
+            prefix+'src/Location.js',
+            prefix+'src/Timer.js'
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {

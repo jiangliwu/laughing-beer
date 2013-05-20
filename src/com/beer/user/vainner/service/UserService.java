@@ -19,6 +19,7 @@ public class UserService {
 		List<User> users = userDAO.findByProperty("username", username);
 		if (users.size() == 0)
 			return "username-null";
+		
 		else if (!users.get(0).getPassword().equals(password))
 			return "password-wa";
 		return "success";

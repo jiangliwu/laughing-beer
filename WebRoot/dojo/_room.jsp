@@ -234,7 +234,7 @@
 				<form action="game_start" method="post" id="startform" name="startform">
 				<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 				<div class="form-actions">
-					<button type="button" id="start-button" class="btn btn-primary offset3" onclick="selfSubmit()">开始游戏</button>
+					<button type="button" id="start-button" class="btn btn-primary offset3" >开始游戏</button>
 				</div>
 				</form>
 				

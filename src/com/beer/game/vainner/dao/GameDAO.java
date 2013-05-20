@@ -1,6 +1,5 @@
 package com.beer.game.vainner.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;

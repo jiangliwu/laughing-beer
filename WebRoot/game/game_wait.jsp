@@ -61,6 +61,8 @@
 		var linkAjax =  "dojo/room/_room_is_start.jsp?id="+id+"&cache="+new Date().getTime();
 		   $.ajax({
 			   type:"GET", 
+			   
+			   
 			   url:linkAjax,             
 			   success:function(data){
 			   		var returnValue = data.split(",")[1];

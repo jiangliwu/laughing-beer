@@ -55,6 +55,14 @@
     		<result name="success">/game/game_play.jsp</result>
     	</action>
     	
+    	<action name="game_process" class="com.beer.game.vainner.action.GameProcessAction">
+    		<result name="success">/game/game_process.jsp</result>
+    	</action>
+    	
+    	
+    	
+    	
+    	
     	<action name="game_switch" class="com.beer.game.vainner.action.GameSwitchIdentify">
     		<result name="success" type="redirect">game_wait!index?id=${id}</result>
     	</action>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="profiler.settings.instrument.empty.methods">true</entry>
+<entry key="ProfilerCPUSettings_profile_runnables">true</entry>
+<entry key="profiler.settings.n.profiled.threads.limit">32</entry>
+<entry key="ProfilerCPUSettings_filter_type">2</entry>
+<entry key="profiler.settings.obj.alloc.stack.sampling.depth">-1</entry>
+<entry key="profiler.settings.instrument.method.invoke">true</entry>
+<entry key="profiler.settings.instr.scheme">1</entry>
+<entry key="ProfilerMemorySettings_track_every">10</entry>
+<entry key="ProfilerMemorySettings_mode">4</entry>
+<entry key="ProfilerCPUSettings_root_classes">com.beer.common.interceptor.**
+com.beer.common.utility.**
+com.beer.game.vainner.action.**
+com.beer.game.vainner.dao.**
+com.beer.game.vainner.model.**
+com.beer.game.vainner.service.**
+com.beer.index.vainner.action.**
+com.beer.user.vainner.action.**
+com.beer.user.vainner.dao.**
+com.beer.user.vainner.model.**
+com.beer.user.vainner.service.**
+com.beer.utility.**
+com.vainner.test.**
+</entry>
+<entry key="ProfilerCPUSettings_filter_value">com.beer.common.interceptor.*,&#13;
+com.beer.common.utility.*,&#13;
+com.beer.game.vainner.action.*,&#13;
+com.beer.game.vainner.dao.*,&#13;
+com.beer.game.vainner.model.*,&#13;
+com.beer.game.vainner.service.*,&#13;
+com.beer.index.vainner.action.*,&#13;
+com.beer.user.vainner.action.*,&#13;
+com.beer.user.vainner.dao.*,&#13;
+com.beer.user.vainner.model.*,&#13;
+com.beer.user.vainner.service.*,&#13;
+com.beer.utility.*,&#13;
+com.vainner.test.*</entry>
+<entry key="profiler.settings.istrument.getter.setter.methods">true</entry>
+<entry key="myeclipse.profiling.mode">0</entry>
+<entry key="ProfilerMemorySettings_stacktraces">-1</entry>
+<entry key="profiler.settings.sampling.interval">10</entry>
+<entry key="profiler.settings.cpu.profiling.type">0</entry>
+</properties>
