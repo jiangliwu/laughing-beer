@@ -1,8 +1,8 @@
-function GenGetUrl(room_id) {
+function GenPullUrl(room_id) {
 	return "game_process?id=" + room_id + "&commandType=get";
 }
 
-function genPostUrl(room_id, sendCount = 0, bookCount = 0) {
+function genPushUrl(room_id, sendCount, bookCount) {
 	return "game_process?id=" + room_id + "&commandType=post&sendCount=" + sendCount + "&bookCount=" + bookCount;
 }
 
@@ -13,4 +13,5 @@ function getParameter(name) {
 	if (r != null) return unescape(r[2]);
 	return null;
 }
+
 

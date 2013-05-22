@@ -8,7 +8,7 @@ var PlayLayer = cc.Layer
 				this._super();
 				var size = cc.Director.getInstance().getWinSize();
 				this._mediator = Mediator.create(this);
-				this._mediator.getTime();
+
 				/*
 				 * var linkAjax = "dojo/room/_room_is_start.jsp?id=" + 141;
 				 * $.ajax({ type: "GET", url: linkAjax, success: function(data) {
@@ -16,18 +16,31 @@ var PlayLayer = cc.Layer
 				 * 
 				 */
 
-				cc.log("test Post Url  =  " + genPostUrl(100));
 				cc.log("id = " + getParameter("id"));
 
 				var colorLayer = cc.LayerColor.create(new cc.Color3B(255, 255,
 						255), size.width, size.height);
 				this.addChild(colorLayer, 0);
 				this.setTouchEnabled(true);
+				this.schedule(this.mainLoop);
+				this.schedule(this.get, 0.5);
 				this.adjustSizeForWindow();
 				window.addEventListener("resize", function(event) {
 					selfPointer.adjustSizeForWindow();
 				});
+
 				return true;
+			},
+
+			mainLoop : function(dt) {
+				var self = this;
+				if(self._mediator.)
+			},
+			get : function(dt) {
+				var self = this;
+				if (false == self._mediator._isGeted) {
+					self._mediator.getTurnDataAndGenForms();
+				}
 			},
 
 			adjustSizeForWindow : function() {

@@ -1,4 +1,4 @@
-var Timer = cc.Layer
+var TimerAndTurnsPanel = cc.Layer
 		.extend({
 			_showTime : null,
 			_showString : null,
@@ -9,6 +9,7 @@ var Timer = cc.Layer
 			SHOW_TIME_TAG : null,
 			_showTurns : null,
 			_showTurnsString : null,
+			_isDone : null,
 			init : function() {
 				this._super();
 				var screenSize = cc.Director.getInstance().getWinSize();
@@ -19,7 +20,7 @@ var Timer = cc.Layer
 				this._showTime.setPosition(cc.p(screenSize.width / 3,
 						screenSize.height - 60));
 				this.addChild(this._showTime, 1, this.SHOW_TIME_TAG);
-				this._time = 30;
+				this._time = EVERY_TURNS_TIME;
 
 				this._totalTurns = 20;
 				this._nowTurns = 0;
@@ -31,60 +32,25 @@ var Timer = cc.Layer
 						screenSize.height - 68));
 				this.updateTurns();
 				this.updateNowTurns();
-				this.schedule(this.step);
 
+				// this.schedule(this.step);
 				return true;
 			},
 
-			// need ajax
-			updateTurns : function() {
-				this._totalTurns = 18;
-				var linkAjax = "dojo/room/_room_total_turns.jsp?id="
-						+ getParameter("id");
-				var turns = 0;
-				$.ajax({
-					type : "GET",
-					url : linkAjax,
-					async : false,
-					success : function(data) {
-						var value = data.split(",")[1];
-						turns = parseInt(value);
-						cc.log("Total Turns = " + turns);
-					}
-				});
-				this._totalTurns = turns;
-				this._showTurns.setString(this.getTurnsString());
+			startCount : function() {
+				this._isDone = false;
+				this._time = EVERY_TURNS_TIME;
+				this.schedule(this.step);
 			},
 
-			updateNowTurns : function() {
-				var linkAjax = "dojo/room/_room_now_turns.jsp?id="
-						+ getParameter("id");
-				var nowTurns = 0;
-				$.ajax({
-					type : "GET",
-					url : linkAjax,
-					async : false,
-					success : function(data) {
-						var value = data.split(",")[1];
-						nowTurns = parseInt(value);
-						cc.log("Now Turns = " + nowTurns);
-					}
-				});
-				this._nowTurns = nowTurns;
-				this._showTurns.setString(this.getTurnsString());
-			},
-
-			getTurnsString : function() {
-				this._showTurnsString = (this._nowTurns < 10 ? "0" : "")
-						+ this._nowTurns;
-				this._showTurnsString += "/"
-						+ (this._totalTurns < 10 ? "0" : "") + this._totalTurns;
-				return this._showTurnsString;
-			},
 			step : function(dt) {
 				this._time -= dt;
 				var t = this._time.toFixed(2);
-
+				if (t < 0.0001) {
+					this.unschedule(this.step);
+					this._isDone = true;
+					cc.log("time is brun out !");
+				}
 				var s = parseInt(t);
 				var m = 0;
 				var secondString;
@@ -101,14 +67,62 @@ var Timer = cc.Layer
 				var label = this.getChildByTag(this.SHOW_TIME_TAG);
 				label.setString(this._showString);
 			},
+
 			getTime : function() {
 				return parseInt(this._time);
+			},
+			// need ajax
+			updateTurns : function() {
+				this._totalTurns = 18;
+				var linkAjax = "dojo/room/_room_total_turns.jsp?id="
+						+ getParameter("id");
+				var turns = 0;
+				var self = this;
+				$.ajax({
+					type : "GET",
+					url : linkAjax,
+					// async : false,
+					success : function(data) {
+						self._totalTurns = data.split(",")[1];
+						self._totalTurns = parseInt(self._totalTurns);
+						self._showTurns.setString(self.getTurnsString());
+						cc.log("Total Turns = " + self._totalTurns);
+					}
+				});
+			},
+
+			updateNowTurns : function() {
+				var linkAjax = "dojo/room/_room_now_turns.jsp?id="
+						+ getParameter("id");
+				var self = this;
+				$.ajax({
+					type : "GET",
+					url : linkAjax,
+					async : false,
+					success : function(data) {
+						self._nowTurns = data.split(",")[1];
+						self._nowTurns = parseInt(self._nowTurns);
+						self._showTurns.setString(self.getTurnsString());
+						cc.log("Now Turns = " + self._nowTurns);
+					}
+				});
+			},
+
+			getTurnsString : function() {
+				this._showTurnsString = (this._nowTurns < 10 ? "0" : "")
+						+ this._nowTurns;
+				this._showTurnsString += "/"
+						+ (this._totalTurns < 10 ? "0" : "") + this._totalTurns;
+				return this._showTurnsString;
+			},
+			setTime : function(time) {
+				this._time = time;
 			},
 
 		});
 
-Timer.create = function() {
-	var ret = new Timer();
+TimerAndTurnsPanel.create = function() {
+	var ret = new TimerAndTurnsPanel();
 	if (ret && ret.init()) {
 		return ret;
 	}

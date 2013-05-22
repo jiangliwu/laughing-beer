@@ -22,17 +22,17 @@ var Location = cc.Layer.extend({
 		this._roomId = getParameter("id");
 		var identify = "";
 		var linkAjax = "dojo/room/_room_get_indentify.jsp?id=" + getParameter("id");
+		
+		var self = this;
         $.ajax({
             type: "GET",
-            url: linkAjax,
-            async:false,		
+            url: linkAjax,		
             success: function(data) {
             	identify = data.split(",")[1];
+                self._showLabel.setString(self._showString + self._roomId + " - " + identify);
                 cc.log("your identify is = " + identify);
             }
         });
-        
-		this._showLabel.setString(this._showString + this._roomId + " - " + identify);
 	}
 
 });

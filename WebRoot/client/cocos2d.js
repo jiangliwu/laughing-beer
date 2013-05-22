@@ -17,7 +17,9 @@
             prefix+'src/myApp.js',
             prefix+'src/Mediator.js',
             prefix+'src/Location.js',
-            prefix+'src/Timer.js'
+            prefix+'src/TimerAndTurnsPanel.js',
+            prefix+'src/Tools.js',
+            prefix+'src/config.js'
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {
