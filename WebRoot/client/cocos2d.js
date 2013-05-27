@@ -19,7 +19,9 @@
             prefix+'src/Location.js',
             prefix+'src/TimerAndTurnsPanel.js',
             prefix+'src/Tools.js',
-            prefix+'src/config.js'
+            prefix+'src/config.js',
+            prefix+'src/DetailsPanel.js',
+            prefix+'src/PostForm.js'
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {

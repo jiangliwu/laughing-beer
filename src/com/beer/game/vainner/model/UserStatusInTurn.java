@@ -107,7 +107,7 @@ public class UserStatusInTurn {
 
 	public String toString() {
 		return this.username + " " + this.order + " " + this.isGeted + " "
-				+ this.getTime +" " + this.receive + " " + this.send + " " +this.book;
+				+ this.getTime +" " + this.receive + " " + this.send + " " +this.book +" " + this.op;
 	}
 
 }

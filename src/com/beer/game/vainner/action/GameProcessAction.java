@@ -65,7 +65,7 @@ public class GameProcessAction extends ActionSupport {
 		if (this.getCommandType().equals("get")) {
 			this.returnContent = processGet(command, username);
 		} else if (this.getCommandType().equals("post")) {
-			logger.debug(username + "post a command!" );
+			logger.debug(username + " post a command!" );
 			this.returnContent = processPost(command, this.username, retail, wholesale, producer, nowTurns);
 		}
 		return SUCCESS;
@@ -79,6 +79,7 @@ public class GameProcessAction extends ActionSupport {
 			if (user.getUsername().equals(username)) {
 				if (!user.isDone()) {
 					logger.debug(username + "Done A command!"); 
+					user.setOp("wait");
 					user.setDone(true);
 					user.setSend(this.getSendCount());
 					user.setBook(this.getBookCount());
@@ -90,12 +91,15 @@ public class GameProcessAction extends ActionSupport {
 			logger.debug("turns " + nowTurns + " is Done , now gen the next command List");
 			this.gameInformation.put("now_turns", ++nowTurns);
 			this.gameInformation.put("command",genNextTurnCommand(command, retail, wholesale, producer, nowTurns));
+			return "done";
 		}
-		else return "wait";
+		return "no-event";
+		
+		/*
 		String drop = isSomeOneDrop(command);
 		if(!drop.equals(""))
 			return "drop|"+drop;
-		return "no-event";
+		*/
 	}
 
 	public List<UserStatusInTurn> genNextTurnCommand(
@@ -145,12 +149,17 @@ public class GameProcessAction extends ActionSupport {
 		// list
 		while (it.hasNext()) {
 			UserStatusInTurn user = it.next(); // extrat command
-			logger.debug(user);
+			
 			if (user.getUsername().equals(username)) {
+				//logger.debug(user);
 				if(user.getOp().equals(""))
 				{
 					//user.setDone(true);
 					return "no-event";
+				}
+				else if(user.getOp().equals("wait"))
+				{
+					return "wait";
 				}
 				user.setGeted(true);
 				user.setGetTime(System.currentTimeMillis());

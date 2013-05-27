@@ -10,33 +10,47 @@ var TimerAndTurnsPanel = cc.Layer
 			_showTurns : null,
 			_showTurnsString : null,
 			_isDone : null,
+			_postedInformation : null,
 			init : function() {
 				this._super();
 				var screenSize = cc.Director.getInstance().getWinSize();
 				this.SHOW_TIME_TAG = 5000;
 				this._showString = "00:00:00";
 				this._showTurnsString = "00/20";
-				this._showTime = cc.LabelTTF.create(this._showString, "宋体", 38);
+				this._showTime = cc.LabelBMFont.create(this._showString,konqa);				
+				this._showTime.setScale(0.7);
+				//this._showTime =cc.LabelTTF.create("","Microsoft Yahei", 36);
 				this._showTime.setPosition(cc.p(screenSize.width / 3,
-						screenSize.height - 60));
+						screenSize.height - 120));
 				this.addChild(this._showTime, 1, this.SHOW_TIME_TAG);
 				this._time = EVERY_TURNS_TIME;
 
 				this._totalTurns = 20;
 				this._nowTurns = 0;
-
-				this._showTurns = cc.LabelTTF.create(this.getTurnsString(),
-						"宋体", 16);
+				
+				this._postedInformation = cc.LabelTTF.create("","Microsoft Yahei", 36);
+				this._postedInformation.setPosition(cc.p(screenSize.width / 3,
+						screenSize.height - 120));
+				this.addChild(this._postedInformation,1);
+				
+				this._showTurns = cc.LabelBMFont.create(this.getTurnsString(),
+						futura);
+				this._showTurns.setScale(0.4);
+				
 				this.addChild(this._showTurns);
 				this._showTurns.setPosition(cc.p(screenSize.width / 3 + 150,
-						screenSize.height - 68));
+						screenSize.height - 128));
 				this.updateTurns();
 				this.updateNowTurns();
-
-				// this.schedule(this.step);
 				return true;
 			},
-
+			
+			showMessage : function(msg)
+			{
+				cc.log("msg = " +msg);
+				this._showTime.setString("");
+				this._postedInformation.setString(msg);
+			},
 			startCount : function() {
 				this._isDone = false;
 				this._time = EVERY_TURNS_TIME;
@@ -49,7 +63,6 @@ var TimerAndTurnsPanel = cc.Layer
 				if (t < 0.0001) {
 					this.unschedule(this.step);
 					this._isDone = true;
-					cc.log("time is brun out !");
 				}
 				var s = parseInt(t);
 				var m = 0;
@@ -65,6 +78,7 @@ var TimerAndTurnsPanel = cc.Layer
 				this._showString += ":" + (t < 10 ? "0" : "") + t;
 
 				var label = this.getChildByTag(this.SHOW_TIME_TAG);
+				this._postedInformation.setString("");
 				label.setString(this._showString);
 			},
 

@@ -9,9 +9,12 @@
 </head>
 
 <body style="padding:0; margin:20; background: #000;">
+<div class="container">
 <div style="text-align: center; font-size: 0">
-    <canvas id="gameCanvas" width="1024" height="768"></canvas>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
 </div>
+</div>
+
 </body>
 
 </html>

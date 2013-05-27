@@ -6,10 +6,9 @@ var Location = cc.Layer.extend({
 		this._super();
 		var screenSize = cc.Director.getInstance().getWinSize();
 
-		this._showString = "您所在的房间号码为 : "
-		this._showLabel = cc.LabelTTF.create(this._showString, "宋体", 12);
-		//this._showLabel.setColor(new cc.Color3B(255,0,0));
-		this._showLabel.setPosition(cc.p(100,screenSize.height - 20));
+		this._showString = "您所在的房间号码为 : " +  getParameter("id") + " - "+ USER_INDENTIFY;
+		this._showLabel = cc.LabelTTF.create(this._showString,"Microsoft Yahei", 14);
+		this._showLabel.setPosition(cc.p(150,screenSize.height - 50));
 		
 		this.addChild(this._showLabel);
 		
