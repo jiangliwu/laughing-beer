@@ -206,5 +206,7 @@ public  class GameWholesalerRecord implements
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
+	public String toString() {
+		return this.getThisTimeProfit() + "";
+	}
 }

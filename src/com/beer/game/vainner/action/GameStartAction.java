@@ -7,7 +7,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.beer.common.utility.ApplicationContextHolder;
+import com.beer.game.vainner.model.Game;
+import com.beer.game.vainner.model.GameRetailRecord;
 import com.beer.game.vainner.model.UserStatusInTurn;
+import com.beer.game.vainner.service.GameRecordInitService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,17 +37,18 @@ public class GameStartAction extends ActionSupport {
 
 		String applicationDataKey = "room" + this.getId();
 
+		// add record
+
 		Map<String, Object> gameInformation = (Map<String, Object>) this
 				.getApplicationData().get(applicationDataKey); // read room
 																// information
 
 		String username = (String) this.getSession().get("username");
-		if (gameInformation == null)
-		{
+		if (gameInformation == null) {
 			logger.debug("room " + this.getId() + "not exist!");
 			return "un_kown_room";
 		}
-		
+
 		List<String> retail = (List<String>) gameInformation.get("retail");
 		List<String> wholesale = (List<String>) gameInformation
 				.get("wholesale");
@@ -61,7 +66,7 @@ public class GameStartAction extends ActionSupport {
 		{
 			Integer nowTurns = 0;
 			gameInformation.put("nowTurns", nowTurns);
-			
+
 			List<UserStatusInTurn> command = new LinkedList<UserStatusInTurn>();
 			Iterator<String> it = retail.iterator();
 			while (it.hasNext()) {
@@ -98,6 +103,16 @@ public class GameStartAction extends ActionSupport {
 					+ "init Done , start success !");
 		}
 
+		GameRecordInitService gameRecordInitService = (GameRecordInitService) ApplicationContextHolder
+				.getApplicationContext().getBean("gameRecordInitService");
+		
+		logger.debug(gameRecordInitService.getFirstRetailRecord(this.getId()));
+		logger.debug(gameRecordInitService.getFirstWholeRecord(this.getId()));
+		logger.debug(gameRecordInitService.getFirstProducerRecord(this.getId()));
+		
+		
+		
+		
 		return "success";
 	}
 

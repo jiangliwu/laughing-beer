@@ -1,8 +1,6 @@
 package com.beer.game.vainner.model;
 
-
-public  class GameProducerRecord implements
-		java.io.Serializable {
+public class GameProducerRecord implements java.io.Serializable {
 
 	// Fields
 
@@ -172,6 +170,10 @@ public  class GameProducerRecord implements
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String toString() {
+		return this.getThisTimeProfit() + "";
 	}
 
 }

@@ -62,6 +62,7 @@ public class GameCreateAction extends ActionSupport {
 
 		if (!needPassword)
 			password = "vainner-no-password";
+		
 		Game game = new Game();
 		game.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		game.setGameTitle(gameTitle);

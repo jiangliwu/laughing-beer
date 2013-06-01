@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.annotation.Resource;
 
@@ -24,6 +23,7 @@ public class GameHallService {
 	public GameHallService() {
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List get() {
 		this.getGameDAO();
 		List<?> result = this.getGameDAO().findByProperty(GameDAO.GAME_STAUTS,

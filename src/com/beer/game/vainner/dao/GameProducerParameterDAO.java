@@ -28,7 +28,7 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	public static final String GAME_ID = "gameId";
 
 	public void save(GameProducerParameter transientInstance) {
-		log.debug("saving TblGameProducerParameter instance");
+		log.debug("saving GameProducerParameter instance");
 		Session session = this.getSession();
 		try {
 			
@@ -42,7 +42,7 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public void delete(GameProducerParameter persistentInstance) {
-		log.debug("deleting TblGameProducerParameter instance");
+		log.debug("deleting GameProducerParameter instance");
 		Session session = this.getSession();
 		try {
 			session.beginTransaction();
@@ -56,10 +56,10 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public GameProducerParameter findById(java.lang.Integer id) {
-		log.debug("getting TblGameProducerParameter instance with id: " + id);
+		log.debug("getting GameProducerParameter instance with id: " + id);
 		try {
 			GameProducerParameter instance = (GameProducerParameter) getSession()
-					.get("com.vainner.game1.TblGameProducerParameter", id);
+					.get("com.vainner.game1.GameProducerParameter", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,11 +68,11 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public List<?> findByExample(GameProducerParameter instance) {
-		log.debug("finding TblGameProducerParameter instance by example");
+		log.debug("finding GameProducerParameter instance by example");
 		try {
 			List<?> results = getSession()
 					.createCriteria(
-							"com.vainner.game1.TblGameProducerParameter")
+							"com.vainner.game1.GameProducerParameter")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -84,10 +84,10 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public List<?> findByProperty(String propertyName, Object value) {
-		log.debug("finding TblGameProducerParameter instance with property: "
+		log.debug("finding GameProducerParameter instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from TblGameProducerParameter as model where model."
+			String queryString = "from GameProducerParameter as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -131,9 +131,9 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public List<?> findAll() {
-		log.debug("finding all TblGameProducerParameter instances");
+		log.debug("finding all GameProducerParameter instances");
 		try {
-			String queryString = "from TblGameProducerParameter";
+			String queryString = "from GameProducerParameter";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -143,7 +143,7 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public GameProducerParameter merge(GameProducerParameter detachedInstance) {
-		log.debug("merging TblGameProducerParameter instance");
+		log.debug("merging GameProducerParameter instance");
 		try {
 			GameProducerParameter result = (GameProducerParameter) getSession()
 					.merge(detachedInstance);
@@ -156,7 +156,7 @@ public class GameProducerParameterDAO extends BaseHibernateDAO {
 	}
 
 	public void attachDirty(GameProducerParameter instance) {
-		log.debug("attaching dirty TblGameProducerParameter instance");
+		log.debug("attaching dirty GameProducerParameter instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
