@@ -10,9 +10,11 @@ var PlayLayer = cc.Layer.extend({
 		var yellowBackground = cc.LayerColor.create(cc.c4b(0, 0, 0, 255));
 		this.addChild(yellowBackground, 0);
 		this.setTouchEnabled(true);
-		// this.schedule(this.mainLoop);
+		
+		
 		this.schedule(this.get, 1);
-
+		
+		
 		return true;
 	},
 

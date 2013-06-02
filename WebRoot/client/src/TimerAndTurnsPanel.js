@@ -56,7 +56,12 @@ var TimerAndTurnsPanel = cc.Layer
 				this._time = EVERY_TURNS_TIME;
 				this.schedule(this.step);
 			},
-
+			
+			stopCount : function ()
+			{
+				this._isDone = true;
+				this.unschedule(this.step);
+			},
 			step : function(dt) {
 				this._time -= dt;
 				var t = this._time.toFixed(2);

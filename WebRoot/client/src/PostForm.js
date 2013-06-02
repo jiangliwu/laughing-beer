@@ -5,6 +5,7 @@ var PostForm = cc.Layer
 			sendTitle : null,
 			bookTitle: null,
 			isPosted : null,
+			commitButton : null,
 			init : function() {
 				var self = this;
 				var screenSize = cc.Director.getInstance().getWinSize();
@@ -14,17 +15,19 @@ var PostForm = cc.Layer
 
 				var menuLabel = cc.LabelTTF.create("完成操作", "Microsoft Yahei",
 						38);
-				var p = cc.MenuItemLabel.create(menuLabel, self.post, self);
-				var menu = cc.Menu.create(p);
+				this.commitButton = cc.MenuItemLabel.create(menuLabel, self.post, self);
+				var menu = cc.Menu.create(this.commitButton);
 				menu.setPosition(cc.p(screenSize.width / 3 + 100, 100));
 				self.addChild(menu);
 				return true;
 			},
 			post : function() {
+				this.commitButton.setEnabled(false);
 				this.isPosted = true;
 			},
 			reset : function(command) {
 				this.isPosted = false;
+				this.commitButton.setEnabled(true);
 			},
 			addSendForm : function() {
 				var self = this;

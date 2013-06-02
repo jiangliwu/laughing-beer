@@ -37,7 +37,7 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	public static final String USER_ID = "userId";
 
 	public void save(GameRetailRecord transientInstance) {
-		log.debug("saving TblGameRetailRecord instance");
+		log.debug("saving GameRetailRecord instance");
 		Session session = this.getSession();
 		try {
 			

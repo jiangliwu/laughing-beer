@@ -17,7 +17,8 @@ public class UserStatusInTurn {
 	private int receive;
 	private int send;
 	private int book;
-	
+	private int other;
+
 	private String op;
 
 	public UserStatusInTurn() {
@@ -28,6 +29,7 @@ public class UserStatusInTurn {
 		this.receive = 0;
 		this.send = 0;
 		this.book = 0;
+		this.other = 0;
 		this.op = "";
 	}
 
@@ -103,11 +105,18 @@ public class UserStatusInTurn {
 		this.op = op;
 	}
 
-
-
 	public String toString() {
 		return this.username + " " + this.order + " " + this.isGeted + " "
-				+ this.getTime +" " + this.receive + " " + this.send + " " +this.book +" " + this.op;
+				+ this.getTime + " " + this.receive + " " + this.send + " "
+				+ this.book + " " + this.op + " " + this.other;
+	}
+
+	public int getOther() {
+		return other;
+	}
+
+	public void setOther(int other) {
+		this.other = other;
 	}
 
 }

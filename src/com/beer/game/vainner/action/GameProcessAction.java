@@ -5,14 +5,18 @@
  */
 package com.beer.game.vainner.action;
 
+import java.sql.Time;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 
+import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.game.vainner.model.UserStatusInTurn;
+import com.beer.game.vainner.service.GameTurnsProcessService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -35,7 +39,7 @@ public class GameProcessAction extends ActionSupport {
 	private String returnContent;
 	private int bookCount;
 	private int sendCount;
-
+	private String cache;
 	private Map<String, Object> gameInformation = null;
 	private String username = null;
 
@@ -48,11 +52,11 @@ public class GameProcessAction extends ActionSupport {
 
 	@SuppressWarnings("unchecked")
 	public String execute() {
-		
+
 		String applicationDataKey = "room" + this.getId();
 
-		this.gameInformation = (Map<String, Object>) this
-				.getApplicationData().get(applicationDataKey); // read room
+		this.gameInformation = (Map<String, Object>) this.getApplicationData()
+				.get(applicationDataKey); // read room
 		List<UserStatusInTurn> command = (List<UserStatusInTurn>) gameInformation
 				.get("command");
 
@@ -65,8 +69,9 @@ public class GameProcessAction extends ActionSupport {
 		if (this.getCommandType().equals("get")) {
 			this.returnContent = processGet(command, username);
 		} else if (this.getCommandType().equals("post")) {
-			logger.debug(username + " post a command!" );
-			this.returnContent = processPost(command, this.username, retail, wholesale, producer, nowTurns);
+			logger.debug(username + " post a command!");
+			this.returnContent = processPost(command, this.username, retail,
+					wholesale, producer, nowTurns);
 		}
 		return SUCCESS;
 	}
@@ -78,28 +83,37 @@ public class GameProcessAction extends ActionSupport {
 			UserStatusInTurn user = command.get(i);
 			if (user.getUsername().equals(username)) {
 				if (!user.isDone()) {
-					logger.debug(username + "Done A command!"); 
+					logger.debug(username + " do a command ! where send = "
+							+ this.getSendCount() + " and book = "
+							+ this.getBookCount());
 					user.setOp("wait");
 					user.setDone(true);
+
 					user.setSend(this.getSendCount());
 					user.setBook(this.getBookCount());
+					((GameTurnsProcessService) ApplicationContextHolder
+							.getApplicationContext().getBean(
+									"gameTurnsProcessService")).saveRecord(
+							gameInformation, this.getUserIndentify(retail,
+									wholesale, producer, this.username), user
+									.getOrder(), user.getReceive(), user
+									.getSend(), user.getBook(), this.getId(),
+							nowTurns);
 				}
 			}
 		}
 
 		if (isAllDone(command)) {
-			logger.debug("turns " + nowTurns + " is Done , now gen the next command List");
+			logger.debug("turns " + nowTurns
+					+ " is Done , now gen the next command List");
 			this.gameInformation.put("now_turns", ++nowTurns);
-			this.gameInformation.put("command",genNextTurnCommand(command, retail, wholesale, producer, nowTurns));
+			this.gameInformation.put(
+					"command",
+					genNextTurnCommand(command, retail, wholesale, producer,
+							nowTurns));
 			return "done";
 		}
 		return "no-event";
-		
-		/*
-		String drop = isSomeOneDrop(command);
-		if(!drop.equals(""))
-			return "drop|"+drop;
-		*/
 	}
 
 	public List<UserStatusInTurn> genNextTurnCommand(
@@ -115,16 +129,19 @@ public class GameProcessAction extends ActionSupport {
 		wholeSaleUser.setUsername(wholesale.get(0));
 		producerUser.setUsername(producer.get(0));
 
-		retailUser.setOrder(5);
+		retailUser.setOrder(new Random().nextInt() % 10);
 		retailUser.setReceive(command.get(1).getSend());
 		wholeSaleUser.setOrder(command.get(0).getBook());
 		wholeSaleUser.setReceive(command.get(2).getSend());
+		
 		producerUser.setOrder(command.get(1).getBook());
-		producerUser.setReceive(command.get(2).getBook());
+		producerUser.setReceive(command.get(2).getOther());
+		producerUser.setOther(command.get(2).getBook());
+		
 		if (nowTurns == 2) {
 			retailUser.setOp("order,send,book");
 			wholeSaleUser.setOp("order,send,book");
-			producerUser.setOp("receive,book");
+			producerUser.setOp("book");
 		} else if (nowTurns == 3) {
 			retailUser.setOp("order,receive,send,book");
 			wholeSaleUser.setOp("order,send,book");
@@ -137,9 +154,9 @@ public class GameProcessAction extends ActionSupport {
 		newCommand.add(retailUser);
 		newCommand.add(wholeSaleUser);
 		newCommand.add(producerUser);
-		
+
 		logger.debug("this next Command List is :");
-		for(int i = 0 ; i < newCommand.size() ; i++)
+		for (int i = 0; i < newCommand.size(); i++)
 			logger.debug(newCommand.get(i));
 		return newCommand;
 	}
@@ -149,21 +166,18 @@ public class GameProcessAction extends ActionSupport {
 		// list
 		while (it.hasNext()) {
 			UserStatusInTurn user = it.next(); // extrat command
-			
+
 			if (user.getUsername().equals(username)) {
-				//logger.debug(user);
-				if(user.getOp().equals(""))
-				{
-					//user.setDone(true);
+				// logger.debug(user);
+				if (user.getOp().equals("")) {
+					user.setDone(true);
 					return "no-event";
-				}
-				else if(user.getOp().equals("wait"))
-				{
+				} else if (user.getOp().equals("wait")) {
 					return "wait";
 				}
 				user.setGeted(true);
 				user.setGetTime(System.currentTimeMillis());
-				
+
 				return user.getOp() + "|" + user.getOrder() + ","
 						+ user.getReceive() + "," + user.getSend() + ","
 						+ user.getBook();
@@ -298,6 +312,14 @@ public class GameProcessAction extends ActionSupport {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getCache() {
+		return cache;
+	}
+
+	public void setCache(String cache) {
+		this.cache = cache;
 	}
 
 }

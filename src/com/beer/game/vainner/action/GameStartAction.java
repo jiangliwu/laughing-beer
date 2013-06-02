@@ -84,7 +84,7 @@ public class GameStartAction extends ActionSupport {
 				UserStatusInTurn user = new UserStatusInTurn();
 				user.setUsername(name);
 				user.setOp("");
-				user.setDone(true);
+				//user.setDone(true);
 				command.add(user);
 			}
 			it = producer.iterator();
@@ -92,27 +92,29 @@ public class GameStartAction extends ActionSupport {
 				String name = it.next();
 				UserStatusInTurn user = new UserStatusInTurn();
 				user.setUsername(name);
-				user.setOp("");
-				user.setDone(true);
+				user.setOp("book");
+				user.setOther(0);
+				//user.setDone(true);
 				command.add(user);
 			}
 
+			GameRecordInitService gameRecordInitService = (GameRecordInitService) ApplicationContextHolder
+					.getApplicationContext().getBean("gameRecordInitService");
+
+			
+			//add record
+			gameInformation.put("retailRecord",
+					gameRecordInitService.getFirstRetailRecord(this.getId()));
+			gameInformation.put("wholesaleRecord",
+					gameRecordInitService.getFirstWholeRecord(this.getId()));
+			gameInformation.put("producerRecord",
+					gameRecordInitService.getFirstProducerRecord(this.getId()));
 			gameInformation.put("command", command);
 			gameInformation.put("start", true);
 			logger.debug("room  " + this.getId()
 					+ "init Done , start success !");
 		}
 
-		GameRecordInitService gameRecordInitService = (GameRecordInitService) ApplicationContextHolder
-				.getApplicationContext().getBean("gameRecordInitService");
-		
-		logger.debug(gameRecordInitService.getFirstRetailRecord(this.getId()));
-		logger.debug(gameRecordInitService.getFirstWholeRecord(this.getId()));
-		logger.debug(gameRecordInitService.getFirstProducerRecord(this.getId()));
-		
-		
-		
-		
 		return "success";
 	}
 
