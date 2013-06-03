@@ -45,7 +45,7 @@ public class IndexAction extends ActionSupport {
 			gameInformation.put("producer", producer);
 			gameInformation.put("total",3);
 			gameInformation.put("start", false);
-			gameInformation.put("turns",20);
+			gameInformation.put("turns",3);
 			gameInformation.put("time",30);
 			gameInformation.put("now_turns",1);
 			

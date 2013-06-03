@@ -1,8 +1,6 @@
 package com.beer.game.vainner.model;
 
-
-public  class GameWholesalerRecord implements
-		java.io.Serializable {
+public class GameWholesalerRecord implements java.io.Serializable {
 
 	// Fields
 
@@ -206,7 +204,15 @@ public  class GameWholesalerRecord implements
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
 	public String toString() {
-		return this.getThisTimeProfit() + "";
+		return this.getThisTimeBuy() + "," + this.getAllNeed() + ","
+				+ this.getActualSale() + "," + this.getAllOwe() + ","
+				+ this.getDelayCost() + "," + this.getBeginGoods() + ","
+				+ this.getReceiveGoods() + "," + this.getReceiveGoods()
+				+ "," + this.getTotalUpOweGoods() + "," + this.getEndGoods()
+				+ "," + this.getStorageCost() + "," + this.getOrderGoods()
+				+ "," + this.getTotalOrderGoods() + ","
+				+ this.getThisTimeProfit();
 	}
 }

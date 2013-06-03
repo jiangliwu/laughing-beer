@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.game.vainner.model.UserStatusInTurn;
 import com.beer.game.vainner.service.GameTurnsProcessService;
+import com.beer.game.vainner.service.GameUserProcessService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -42,12 +43,13 @@ public class GameProcessAction extends ActionSupport {
 	private String cache;
 	private Map<String, Object> gameInformation = null;
 	private String username = null;
+	private int userId;
 
 	public GameProcessAction() {
 		this.setSession(ActionContext.getContext().getSession());
 		this.setApplicationData(ActionContext.getContext().getApplication());
 		this.username = (String) this.getSession().get("username");
-
+		this.userId = (Integer) this.getSession().get("id");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -66,19 +68,21 @@ public class GameProcessAction extends ActionSupport {
 		List<String> producer = (List<String>) gameInformation.get("producer");
 
 		Integer nowTurns = (Integer) gameInformation.get("now_turns");
+		Integer totalTurns = (Integer) gameInformation.get("turns");
 		if (this.getCommandType().equals("get")) {
-			this.returnContent = processGet(command, username);
+			this.returnContent = processGet(command, username, retail,
+					wholesale, producer, nowTurns, totalTurns);
 		} else if (this.getCommandType().equals("post")) {
 			logger.debug(username + " post a command!");
 			this.returnContent = processPost(command, this.username, retail,
-					wholesale, producer, nowTurns);
+					wholesale, producer, nowTurns, totalTurns);
 		}
 		return SUCCESS;
 	}
 
 	public String processPost(List<UserStatusInTurn> command, String username,
 			List<String> retail, List<String> wholesale, List<String> producer,
-			int nowTurns) {
+			int nowTurns, int totalTurns) {
 		for (int i = 0; i < command.size(); i++) {
 			UserStatusInTurn user = command.get(i);
 			if (user.getUsername().equals(username)) {
@@ -93,20 +97,27 @@ public class GameProcessAction extends ActionSupport {
 					user.setBook(this.getBookCount());
 					((GameTurnsProcessService) ApplicationContextHolder
 							.getApplicationContext().getBean(
-									"gameTurnsProcessService")).saveRecord(
+									"gameTurnsProcessService")).updateRecord(
 							gameInformation, this.getUserIndentify(retail,
 									wholesale, producer, this.username), user
 									.getOrder(), user.getReceive(), user
 									.getSend(), user.getBook(), this.getId(),
-							nowTurns);
+							nowTurns, true, this.userId);
 				}
 			}
 		}
-
+		
+		
 		if (isAllDone(command)) {
 			logger.debug("turns " + nowTurns
 					+ " is Done , now gen the next command List");
 			this.gameInformation.put("now_turns", ++nowTurns);
+			if (nowTurns > totalTurns) {
+				((GameUserProcessService) ApplicationContextHolder
+						.getApplicationContext().getBean(
+								"gameUserProcessService"))
+						.gameEndProcess(this.userId);
+			}
 			this.gameInformation.put(
 					"command",
 					genNextTurnCommand(command, retail, wholesale, producer,
@@ -133,11 +144,11 @@ public class GameProcessAction extends ActionSupport {
 		retailUser.setReceive(command.get(1).getSend());
 		wholeSaleUser.setOrder(command.get(0).getBook());
 		wholeSaleUser.setReceive(command.get(2).getSend());
-		
+
 		producerUser.setOrder(command.get(1).getBook());
 		producerUser.setReceive(command.get(2).getOther());
 		producerUser.setOther(command.get(2).getBook());
-		
+
 		if (nowTurns == 2) {
 			retailUser.setOp("order,send,book");
 			wholeSaleUser.setOp("order,send,book");
@@ -161,7 +172,9 @@ public class GameProcessAction extends ActionSupport {
 		return newCommand;
 	}
 
-	public String processGet(List<UserStatusInTurn> command, String username) {
+	public String processGet(List<UserStatusInTurn> command, String username,
+			List<String> retail, List<String> wholesale, List<String> producer,
+			int nowTurns, int totalTurns) {
 		Iterator<UserStatusInTurn> it = command.iterator(); // query command
 		// list
 		while (it.hasNext()) {
@@ -169,28 +182,40 @@ public class GameProcessAction extends ActionSupport {
 
 			if (user.getUsername().equals(username)) {
 				// logger.debug(user);
+				if (nowTurns > totalTurns) {
+					return "gameOver";
+				}
 				if (user.getOp().equals("")) {
-					user.setDone(true);
 					return "no-event";
 				} else if (user.getOp().equals("wait")) {
 					return "wait";
 				}
+				if (user.isGeted() == false) {
+					((GameTurnsProcessService) ApplicationContextHolder
+							.getApplicationContext().getBean(
+									"gameTurnsProcessService")).updateRecord(
+							gameInformation, this.getUserIndentify(retail,
+									wholesale, producer, this.username), user
+									.getOrder(), user.getReceive(), 0, 0, this
+									.getId(), nowTurns, false, this.userId);
+				}
 				user.setGeted(true);
 				user.setGetTime(System.currentTimeMillis());
-
 				return user.getOp() + "|" + user.getOrder() + ","
 						+ user.getReceive() + "," + user.getSend() + ","
 						+ user.getBook();
 			}
 		}
 		return "no-event";
+
 	}
 
 	public boolean isAllDone(List<UserStatusInTurn> command) {
-
+		
 		Iterator<UserStatusInTurn> it = command.iterator();
 		while (it.hasNext()) {
 			UserStatusInTurn user = it.next();
+			logger.debug(user.getUsername() + " " + user.isDone());
 			if (!user.isDone())
 				return false;
 		}

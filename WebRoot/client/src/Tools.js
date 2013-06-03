@@ -8,6 +8,7 @@ function genPushUrl(room_id, sendCount, bookCount) {
 			+ sendCount + "&bookCount=" + bookCount + "&cache=" + new Date();
 }
 
+
 function getParameter(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 	var r = window.location.search.substr(1).match(reg);

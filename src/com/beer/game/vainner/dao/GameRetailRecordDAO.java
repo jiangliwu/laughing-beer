@@ -51,7 +51,7 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public void delete(GameRetailRecord persistentInstance) {
-		log.debug("deleting TblGameRetailRecord instance");
+		log.debug("deleting GameRetailRecord instance");
 		Session session = this.getSession();
 		try {
 			session.beginTransaction();
@@ -65,10 +65,10 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public GameRetailRecord findById(java.lang.Integer id) {
-		log.debug("getting TblGameRetailRecord instance with id: " + id);
+		log.debug("getting GameRetailRecord instance with id: " + id);
 		try {
 			GameRetailRecord instance = (GameRetailRecord) getSession()
-					.get("com.vainner.game1.TblGameRetailRecord", id);
+					.get("com.vainner.game1.GameRetailRecord", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -77,10 +77,10 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public List<?> findByExample(GameRetailRecord instance) {
-		log.debug("finding TblGameRetailRecord instance by example");
+		log.debug("finding GameRetailRecord instance by example");
 		try {
 			List<?> results = getSession()
-					.createCriteria("com.vainner.game1.TblGameRetailRecord")
+					.createCriteria("com.vainner.game1.GameRetailRecord")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -92,10 +92,10 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public List<?> findByProperty(String propertyName, Object value) {
-		log.debug("finding TblGameRetailRecord instance with property: "
+		log.debug("finding GameRetailRecord instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from TblGameRetailRecord as model where model."
+			String queryString = "from GameRetailRecord as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -175,9 +175,9 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public List<?> findAll() {
-		log.debug("finding all TblGameRetailRecord instances");
+		log.debug("finding all GameRetailRecord instances");
 		try {
-			String queryString = "from TblGameRetailRecord";
+			String queryString = "from GameRetailRecord";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -187,7 +187,7 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public GameRetailRecord merge(GameRetailRecord detachedInstance) {
-		log.debug("merging TblGameRetailRecord instance");
+		log.debug("merging GameRetailRecord instance");
 		try {
 			GameRetailRecord result = (GameRetailRecord) getSession()
 					.merge(detachedInstance);
@@ -200,7 +200,7 @@ public class GameRetailRecordDAO extends BaseHibernateDAO {
 	}
 
 	public void attachDirty(GameRetailRecord instance) {
-		log.debug("attaching dirty TblGameRetailRecord instance");
+		log.debug("attaching dirty GameRetailRecord instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");

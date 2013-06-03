@@ -18,13 +18,13 @@ function Mediator() {
 
 		this._timer = TimerAndTurnsPanel.create();
 		this._layer.addChild(this._timer, 1);
-		
+
 		this._details = DetailsPanel.create();
-		this._layer.addChild(this._details,1);
-		
+		this._layer.addChild(this._details, 1);
+
 		this._postForm = PostForm.create();
-		this._layer.addChild(this._postForm,1);
-		
+		this._layer.addChild(this._postForm, 1);
+
 		this._isGeted = false;
 		this._command = "";
 		return true;
@@ -32,10 +32,11 @@ function Mediator() {
 
 	this.postTurnData = function() {
 		var self = this;
-		var send = parseInt(Math.random()*100)%8;
-		if(self._command.indexOf("send") < 0)
+		var send = parseInt(Math.random() * 100) % 8;
+		cc.log("command = " +self._command);
+		if (self._command.indexOf("send") < 0)
 			send = 0;
-		var book = parseInt(Math.random()*100)%10;
+		var book = parseInt(Math.random() * 100) % 10;
 		var link = genPushUrl(getParameter("id"), send, book);
 		cc.log("push links = " + link);
 		$.ajax({
@@ -45,6 +46,7 @@ function Mediator() {
 				var ret = data.split("((((")[1];
 				self._isGeted = false;
 				self._timer.stopCount();
+				self._details.updateInformationFromServer();
 			}
 		});
 	},
@@ -57,16 +59,21 @@ function Mediator() {
 			url : link,
 			success : function(data) {
 				var ret = data.split("((((")[1];
-				if (ret == "no-event") {
+				if (ret == "gameOver") {
+					cc.log("game over!");
+					window.location.href = "game_show_record?id="+getParameter("id");
+				} else if (ret == "no-event") {
 					self._timer.showMessage("这周无事可做");
 				} else if (ret == "wait") {
 					self._timer.showMessage("等待下一周！");
 				} else {
+					self._details.updateInformationFromServer();
 					self._timer.showMessage("");
 					self._timer.startCount();
 					self._isGeted = true;
 					self._command = ret;
 					self._timer.updateNowTurns();
+
 					self._postForm.reset(ret);
 				}
 			}

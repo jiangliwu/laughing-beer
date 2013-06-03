@@ -17,10 +17,28 @@ var DetailsPanel = cc.Layer
 					self.indentify_id = 2;
 				else
 					self.indentify_id = 3;
+
+				
 				self.genTables();
+				self.updateInformationFromServer();
 				return true;
 			},
-
+			updateInformationFromServer : function() {
+				var self = this;
+				var linkAjax = "dojo/room/_room_record_turns.jsp?id="
+						+ getParameter("id") + "&key="
+						+ indentifyRecord[self.indentify_id];
+				$.ajax({
+					type : "GET",
+					url : linkAjax,
+					success : function(data) {
+						var ret = data.split(")))")[1].split(",");
+						for ( var i = 0; i < ret.length; i++) {
+							self.values[i].setString(ret[i]);
+						}
+					}
+				});
+			},
 			genTables : function() {
 				var self = this;
 				var offset = 30;
@@ -31,9 +49,9 @@ var DetailsPanel = cc.Layer
 					return false;
 				for ( var i = 0; i < tableLabels[self.indentify_id].length; i++) {
 					self.labels[i] = cc.LabelTTF.create(
-							tableLabels[self.indentify_id][i]+" :",
+							tableLabels[self.indentify_id][i] + " :",
 							"Microsoft Yahei", 14);
-					self.values[i] = cc.LabelTTF.create("0.0",
+					self.values[i] = cc.LabelTTF.create("0",
 							"Microsoft Yahei", 14);
 					self.labels[i].setPosition(cc.p(start.x, start.y));
 					self.values[i].setPosition(cc.p(start.x + 100, start.y));
@@ -43,7 +61,7 @@ var DetailsPanel = cc.Layer
 				}
 			},
 			fillTable : function(data) {
-				
+
 			}
 
 		});

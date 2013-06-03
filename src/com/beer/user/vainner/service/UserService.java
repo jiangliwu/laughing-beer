@@ -15,14 +15,14 @@ public class UserService {
 	private UserDAO userDAO;
 
 	@SuppressWarnings("unchecked")
-	public String login(String username, String password) {
+	public int login(String username, String password) {
 		List<User> users = userDAO.findByProperty("username", username);
 		if (users.size() == 0)
-			return "username-null";
+			return -1;
 		
 		else if (!users.get(0).getPassword().equals(password))
-			return "password-wa";
-		return "success";
+			return -2;
+		return users.get(0).getId();
 	}
 
 	public void add(User user) {

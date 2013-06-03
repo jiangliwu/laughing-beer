@@ -234,8 +234,14 @@
 				<form action="game_start" method="post" id="startform" name="startform">
 				<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 				<div class="form-actions">
-					<button type="button" id="start-button" class="btn btn-primary offset3" >开始游戏</button>
+					<button type="button" id="start-button" class="btn btn-primary offset3" onclick="go()">开始游戏</button>
 				</div>
+				<script type="text/javascript">
+					function go()
+					{
+						window.location.href="game_start?id=" + <%=request.getParameter("id")%>;
+					}
+				</script>
 				</form>
 				
 		<%

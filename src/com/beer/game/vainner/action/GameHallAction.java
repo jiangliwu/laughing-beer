@@ -16,7 +16,7 @@ public class GameHallAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(GameHallAction.class);
-	private List games;
+	private List<?> games;
 
 	public String execute() {
 		GameHallService gameHallService = (GameHallService) ApplicationContextHolder
@@ -25,11 +25,11 @@ public class GameHallAction extends ActionSupport {
 		return "success";
 	}
 
-	public List getGames() {
+	public List<?> getGames() {
 		return games;
 	}
 
-	public void setGames(List games) {
+	public void setGames(List<?> games) {
 		this.games = games;
 	}
 

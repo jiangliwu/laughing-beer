@@ -173,7 +173,12 @@ public class GameProducerRecord implements java.io.Serializable {
 	}
 
 	public String toString() {
-		return this.getThisTimeProfit() + "";
+		return this.getThisTimeBuy() + "," + this.getAllNeed() + ","
+				+ this.getActualSale() + "," + this.getAllOwe() + ","
+				+ this.getDelayCost() + "," + this.getBeginGoods() + ","
+				+ this.getReceiveGoods() + "," + this.getEndGoods() + ","
+				+ this.getStorageCost() + "," + this.getOrderGoods() + ","
+				+ this.getThisTimeProfit();
 	}
 
 }

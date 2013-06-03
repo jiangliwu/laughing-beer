@@ -52,13 +52,6 @@ public class GameCreateAction extends ActionSupport {
 
 	public String create() {
 
-		log.debug("message form game create Action !!!");
-		log.debug(retail);
-		log.debug(wholesale);
-		log.debug(producer);
-		log.debug("game title : " + gameTitle);
-		log.debug("password : " + needPassword + password);
-		log.debug(retailNumber + " " + wholesaleNumber + producerNumber);
 
 		if (!needPassword)
 			password = "vainner-no-password";
@@ -106,6 +99,7 @@ public class GameCreateAction extends ActionSupport {
 			gameInformation.put("message", message);
 			gameInformation.put("turns",game.getAllTimes());
 			gameInformation.put("time",game.getOnceTime());
+			gameInformation.put("now_turns",1);
 			gameInformation.put("start", false);
 			this.getApplicationData().put(applicationDataKey, gameInformation); // 写入信息
 			this.setGameId(game.getGameId());

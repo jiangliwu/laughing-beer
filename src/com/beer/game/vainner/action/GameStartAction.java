@@ -12,6 +12,7 @@ import com.beer.game.vainner.model.Game;
 import com.beer.game.vainner.model.GameRetailRecord;
 import com.beer.game.vainner.model.UserStatusInTurn;
 import com.beer.game.vainner.service.GameRecordInitService;
+import com.beer.game.vainner.service.GameUserProcessService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -26,10 +27,12 @@ public class GameStartAction extends ActionSupport {
 	private Map<String, Object> session;
 	private Map<String, Object> applicationData;
 	private Logger logger = Logger.getLogger(GameStartAction.class);
+	private int userId;
 
 	public GameStartAction() {
 		this.setSession(ActionContext.getContext().getSession());
 		this.setApplicationData(ActionContext.getContext().getApplication());
+		this.userId = (Integer) this.getSession().get("id");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -84,7 +87,7 @@ public class GameStartAction extends ActionSupport {
 				UserStatusInTurn user = new UserStatusInTurn();
 				user.setUsername(name);
 				user.setOp("");
-				//user.setDone(true);
+				user.setDone(true);
 				command.add(user);
 			}
 			it = producer.iterator();
@@ -94,15 +97,13 @@ public class GameStartAction extends ActionSupport {
 				user.setUsername(name);
 				user.setOp("book");
 				user.setOther(0);
-				//user.setDone(true);
 				command.add(user);
 			}
 
 			GameRecordInitService gameRecordInitService = (GameRecordInitService) ApplicationContextHolder
 					.getApplicationContext().getBean("gameRecordInitService");
 
-			
-			//add record
+			// add record
 			gameInformation.put("retailRecord",
 					gameRecordInitService.getFirstRetailRecord(this.getId()));
 			gameInformation.put("wholesaleRecord",
@@ -111,11 +112,40 @@ public class GameStartAction extends ActionSupport {
 					gameRecordInitService.getFirstProducerRecord(this.getId()));
 			gameInformation.put("command", command);
 			gameInformation.put("start", true);
+			
+			GameUserProcessService gameUserProcessService = (GameUserProcessService) ApplicationContextHolder
+					.getApplicationContext().getBean("gameUserProcessService");
+			gameUserProcessService.gameStartProcess(this.userId, this.getId(),
+					this.getIdentify(retail, wholesale, retail, username));
+			
 			logger.debug("room  " + this.getId()
 					+ "init Done , start success !");
 		}
 
 		return "success";
+	}
+
+	public int getIdentify(List<String> a, List<String> b, List<String> c,
+			String username) {
+		Iterator<String> it = a.iterator();
+		while (it.hasNext()) {
+			String name = it.next();
+			if (name.equals(username))
+				return 1;
+		}
+		it = b.iterator();
+		while (it.hasNext()) {
+			String name = it.next();
+			if (name.equals(username))
+				return 2;
+		}
+		it = c.iterator();
+		while (it.hasNext()) {
+			String name = it.next();
+			if (name.equals(username))
+				return 3;
+		}
+		return 0;
 	}
 
 	public String userIsInRoom(List<String> a, List<String> b, List<String> c,

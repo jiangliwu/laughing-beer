@@ -206,6 +206,13 @@ public class GameRetailRecord implements java.io.Serializable {
 	}
 
 	public String toString() {
-		return this.getThisTimeProfit() + "";
+		return this.getThisTimeBuy() + "," + this.getAllNeed() + ","
+				+ this.getActualSale() + "," + this.getAllOwe() + ","
+				+ this.getDelayCost() + "," + this.getBeginGoods() + ","
+				+ this.getReceiveGoods() + "," + this.getReceiveGoods()
+				+ "," + this.getTotalUpOweGoods() + "," + this.getEndGoods()
+				+ "," + this.getStorageCost() + "," + this.getOrderGoods()
+				+ "," + this.getTotalOrderGoods() + ","
+				+ this.getThisTimeProfit();
 	}
 }

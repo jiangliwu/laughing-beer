@@ -59,6 +59,9 @@
     		<result name="success">/game/game_process.jsp</result>
     	</action>
     	
+    	<action name="game_show_record" class="com.beer.game.vainner.action.GameShowRecordAction">
+    		<result name="success">/game/game_show_record.jsp</result>
+    	</action>
     	
     	
     	
