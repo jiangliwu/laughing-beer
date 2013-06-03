@@ -5,74 +5,90 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    <constant name="struts.devMode" value="true" />
-    <constant name="struts.i18n.encoding" value="UTF-8"/>
-    <constant name="struts.ui.theme" value="simple"></constant>
-    <!--	<constant name="struts.action.extension" value="html"/>  .访问扩展名 -->
-	
-	
-	
-    <package name="default" namespace="/" extends="struts-default">
-    
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- <constant name="struts.action.extension" value="html"/> .访问扩展名 -->
 
-    
-    
-    	<default-action-ref name="index"></default-action-ref>
-    	
-    	<action name="index" class="com.beer.index.vainner.action.IndexAction">
-    		<result name="success">/index.jsp</result>
-    	</action>
-    	
-    
-    	
-    	<action name="user_*" class="com.beer.user.vainner.action.UserAction" method="{1}">
-    		<result>/user/user_{1}_success.jsp</result>
-    		<result name="error">/user/user_{1}.jsp</result>
-    	</action>
-    	
-    	<action name="user_register" class="com.beer.user.vainner.action.UserRegisterAction">
-    		<result name="index">/user/user_register.jsp</result>
-    		<result name="success">/user/user_register_success.jsp</result>
-    		<result name="error">/user/user_register.jsp</result>
-    	</action>
-    	
-    	<action name="game_hall"  class="com.beer.game.vainner.action.GameHallAction">
-    		<result>/game/game_hall.jsp</result>
-    	</action>
-    	
-    	<action name="game_create" class="com.beer.game.vainner.action.GameCreateAction">
-    		<result name="index">/game/game_create.jsp</result>
-    		<result name="success" type="redirect">game_wait!index?id=${gameId}</result>
-    		<result name="error">/game/game_create.jsp</result>
-    	</action>
-    	
-    	<action name="game_wait" class="com.beer.game.vainner.action.GameWaitAction">
-    		<result name="index">/game/game_wait.jsp</result>
-    	</action>
-    	
-    	<action name="game_start" class="com.beer.game.vainner.action.GameStartAction">
-    		<result name="success">/game/game_play.jsp</result>
-    	</action>
-    	
-    	<action name="game_process" class="com.beer.game.vainner.action.GameProcessAction">
-    		<result name="success">/game/game_process.jsp</result>
-    	</action>
-    	
-    	<action name="game_show_record" class="com.beer.game.vainner.action.GameShowRecordAction">
-    		<result name="success">/game/game_show_record.jsp</result>
-    	</action>
-    	
-    	
-    	
-    	
-    	<action name="game_switch" class="com.beer.game.vainner.action.GameSwitchIdentify">
-    		<result name="success" type="redirect">game_wait!index?id=${id}</result>
-    	</action>
-    	<action name="game_exit" class="com.beer.game.vainner.action.GameExitAction">
-    		<result type="redirect">game_hall</result>
-    	</action>
-    	
-    </package>
-    
+
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="authority"
+				class="com.beer.common.interceptor.UserLoginInterceptor">
+			</interceptor>
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefault" />
+
+
+
+		<default-action-ref name="index"></default-action-ref>
+
+		<global-results>
+			<result name="login">/user/user_login.jsp</result>
+		</global-results>
+
+		<action name="game_hall" class="com.beer.game.vainner.action.GameHallAction">
+			<result name="success">/game/game_hall.jsp</result>
+			<result name="run">/game/game_run.jsp</result>
+			<result name="mygame">/game/game_mygame.jsp</result>
+		</action>
+
+		<action name="game_create" class="com.beer.game.vainner.action.GameCreateAction">
+			<result name="index">/game/game_create.jsp</result>
+			<result name="success" type="redirect">game_wait!index?id=${gameId}
+			</result>
+			<result name="error">/game/game_create.jsp</result>
+		</action>
+
+		<action name="game_wait" class="com.beer.game.vainner.action.GameWaitAction">
+			<result name="index">/game/game_wait.jsp</result>
+		</action>
+
+		<action name="game_start" class="com.beer.game.vainner.action.GameStartAction">
+			<result name="success">/game/game_play.jsp</result>
+		</action>
+
+		<action name="game_process" class="com.beer.game.vainner.action.GameProcessAction">
+			<result name="success">/game/game_process.jsp</result>
+		</action>
+		<action name="game_show_record"
+			class="com.beer.game.vainner.action.GameShowRecordAction">
+			<result name="success">/game/game_show_record.jsp</result>
+		</action>
+		
+		<action name="game_switch" class="com.beer.game.vainner.action.GameSwitchIdentify">
+			<result name="success" type="redirect">game_wait!index?id=${id}</result>
+		</action>
+		<action name="game_exit" class="com.beer.game.vainner.action.GameExitAction">
+			<result type="redirect">game_hall</result>
+		</action>
+		<action name="dev" class="com.beer.index.vainner.action.IndexAction" method="dev">
+			<result name="success">/user/dev.jsp</result>
+		</action>
+	</package>
+
+	<package name="registerAndLogin" namespace="/" extends="struts-default">
+		<action name="index" class="com.beer.index.vainner.action.IndexAction">
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<action name="user_register" class="com.beer.user.vainner.action.UserRegisterAction">
+			<result name="index">/user/user_register.jsp</result>
+			<result name="success">/user/user_register_success.jsp</result>
+			<result name="error">/user/user_register.jsp</result>
+		</action>
+
+		<action name="user_*" class="com.beer.user.vainner.action.UserAction"
+			method="{1}">
+			<result>/user/user_{1}_success.jsp</result>
+			<result name="error">/user/user_{1}.jsp</result>
+		</action>
+	</package>
 </struts>

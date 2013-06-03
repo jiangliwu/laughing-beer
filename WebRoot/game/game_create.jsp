@@ -186,13 +186,11 @@
 				<div class="span3 offset1">
 
 					<ul class="nav nav-tabs nav-stacked">
-						<li class="active"><s:a action="user_register!registerIndex">创建游戏</s:a>
-						</li>
-
-						<li><s:a action="user_register!registerIndex">进行中的游戏</s:a></li>
-						<li><s:a href="">等待中的游戏</s:a></li>
-						<li><s:a href="">我创建的游戏</s:a></li>
-						<li><s:a action="user_register!registerIndex">进行中的游戏</s:a></li>
+					
+						<li class="active"><s:a action="game_create!index">创建游戏</s:a></li>
+						<li><s:a action="game_hall!runing">进行中的游戏</s:a></li>
+						<li ><s:a action="game_hall">等待中的游戏</s:a></li>
+						<li><s:a action="game_hall!mygame">我创建的游戏</s:a></li>
 					</ul>
 
 				</div>

@@ -22,9 +22,9 @@ public class UserGameDAO extends BaseHibernateDAO {
 		log.debug("saving UserGame instance");
 		Session session = this.getSession();
 		try {
-			session.beginTransaction();
+		
 			session.save(transientInstance);
-			session.getTransaction().commit();
+			
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);

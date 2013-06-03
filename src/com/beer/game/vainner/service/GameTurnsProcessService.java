@@ -5,6 +5,7 @@
  */
 package com.beer.game.vainner.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,13 +13,9 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import com.beer.common.utility.SessionFactoryHolder;
 import com.beer.game.vainner.dao.GameProducerParameterDAO;
-import com.beer.game.vainner.dao.GameProducerRecordDAO;
 import com.beer.game.vainner.dao.GameRetailParameterDAO;
-import com.beer.game.vainner.dao.GameRetailRecordDAO;
 import com.beer.game.vainner.dao.GameWholesaleParameterDAO;
-import com.beer.game.vainner.dao.GameWholesalerRecordDAO;
 import com.beer.game.vainner.model.GameProducerParameter;
 import com.beer.game.vainner.model.GameProducerRecord;
 import com.beer.game.vainner.model.GameRetailParameter;
@@ -59,11 +56,15 @@ public class GameTurnsProcessService {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void saveRetailRecord(Map<String, Object> room, int order,
 			int receive, int send, int book, boolean needSave) {
 		GameRetailRecord pre = (GameRetailRecord) room.get("retailRecord");
-		GameRetailParameter para = (GameRetailParameter) this
-				.getGameRetailParameterDAO().findByGameId(this.gameId).get(0);
+		List<GameRetailRecord> recordList = (List<GameRetailRecord>) room
+				.get("retailRecordList");
+
+		GameRetailParameter para = (GameRetailParameter) room
+				.get("retailConfig");
 		GameRetailRecord save = new GameRetailRecord();
 		save.setThisTimeBuy(order * 1.0);
 		if (needSave == false) {
@@ -115,22 +116,32 @@ public class GameTurnsProcessService {
 		save.setTimes(this.turns);
 		save.setUserId(this.userId);
 		room.put("retailRecord", save);
+
 		if (needSave) {
-			SessionFactoryHolder.getSession().beginTransaction();
-			new GameRetailRecordDAO().save(save);
-			SessionFactoryHolder.getSession().getTransaction().commit();
+			/*
+			 * Session tSession = SessionFactoryHolder.getSessionFactory()
+			 * .openSession(); tSession.beginTransaction(); tSession.save(save);
+			 * tSession.getTransaction().commit();
+			 * 
+			 * tSession.close();
+			 */
+			log.debug(this.userId + " " + this.turns
+					+ " retailRecord save to application success!");
+			recordList.add(save);
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void saveWholesaleRecord(Map<String, Object> room, int order,
 			int receive, int send, int book, boolean needSave) {
 
 		GameWholesalerRecord pre = (GameWholesalerRecord) room
 				.get("wholesaleRecord");
-		GameWholesaleParameter para = (GameWholesaleParameter) this
-				.getGameWholesaleParameterDAO().findByGameId(this.gameId)
-				.get(0);
 
+		List<GameWholesalerRecord> recordList = (List<GameWholesalerRecord>) room
+				.get("wholesaleRecordList");
+		GameWholesaleParameter para = (GameWholesaleParameter) room
+				.get("wholesaleConfig");
 		GameWholesalerRecord save = new GameWholesalerRecord();
 		save.setThisTimeBuy(order * 1.0);
 		if (needSave == false) {
@@ -183,20 +194,29 @@ public class GameTurnsProcessService {
 		save.setUserId(this.userId);
 		room.put("wholesaleRecord", save);
 		if (needSave) {
-			SessionFactoryHolder.getSession().beginTransaction();
-			new GameWholesalerRecordDAO().save(save);
-			SessionFactoryHolder.getSession().getTransaction().commit();
+			/*
+			 * Session tSession = SessionFactoryHolder.getSessionFactory()
+			 * .openSession(); tSession.beginTransaction(); tSession.save(save);
+			 * tSession.getTransaction().commit(); tSession.close();
+			 */
+			log.debug(this.userId + " " + this.turns
+					+ " wholesaleRecord save to application success!");
+			recordList.add(save);
 
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void saveProducerRecord(Map<String, Object> room, int order,
 			int receive, int send, int book, boolean needSave) {
 
 		GameProducerRecord pre = (GameProducerRecord) room
 				.get("producerRecord");
-		GameProducerParameter para = (GameProducerParameter) this
-				.getGameProducerParameterDAO().findByGameId(this.gameId).get(0);
+
+		List<GameProducerRecord> recordList = (List<GameProducerRecord>) room
+				.get("producerRecordList");
+		GameProducerParameter para = (GameProducerParameter) room
+				.get("producerConfig");
 
 		GameProducerRecord save = new GameProducerRecord();
 
@@ -239,10 +259,16 @@ public class GameTurnsProcessService {
 		save.setTimes(this.turns);
 		save.setUserId(this.userId);
 		room.put("producerRecord", save);
+
 		if (needSave) {
-			SessionFactoryHolder.getSession().beginTransaction();
-			new GameProducerRecordDAO().save(save);
-			SessionFactoryHolder.getSession().getTransaction().commit();
+			/*
+			 * Session tSession = SessionFactoryHolder.getSessionFactory()
+			 * .openSession(); tSession.beginTransaction(); tSession.save(save);
+			 * tSession.getTransaction().commit(); tSession.close();
+			 */
+			log.debug(this.userId + " " + this.turns
+					+ " producerRecord save to application success!");
+			recordList.add(save);
 
 		}
 	}

@@ -17,8 +17,8 @@ import com.beer.game.vainner.model.GameProducerParameter;
 import com.beer.game.vainner.model.GameRetailParameter;
 import com.beer.game.vainner.model.GameWholesaleParameter;
 
-@Component("gameCreateService")
-public class GameCreateService {
+@Component("gameRoomStatusService")
+public class GameRoomStatusService {
 	private GameProducerParameterDAO gameProducerParameterDAO;
 	private GameRetailParameterDAO gameRetailParameterDAO;
 	private GameWholesaleParameterDAO gameWholesaleParameterDAO;

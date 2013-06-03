@@ -5,7 +5,7 @@
  */
 package com.beer.game.vainner.action;
 
-import java.sql.Time;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.game.vainner.model.UserStatusInTurn;
 import com.beer.game.vainner.service.GameTurnsProcessService;
-import com.beer.game.vainner.service.GameUserProcessService;
+import com.beer.game.vainner.service.GameStartAndEndProcessService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -90,8 +90,6 @@ public class GameProcessAction extends ActionSupport {
 					logger.debug(username + " do a command ! where send = "
 							+ this.getSendCount() + " and book = "
 							+ this.getBookCount());
-					user.setOp("wait");
-					user.setDone(true);
 
 					user.setSend(this.getSendCount());
 					user.setBook(this.getBookCount());
@@ -103,20 +101,23 @@ public class GameProcessAction extends ActionSupport {
 									.getOrder(), user.getReceive(), user
 									.getSend(), user.getBook(), this.getId(),
 							nowTurns, true, this.userId);
+					user.setOp("wait");
+					user.setDone(true);
 				}
 			}
 		}
-		
-		
+
 		if (isAllDone(command)) {
 			logger.debug("turns " + nowTurns
 					+ " is Done , now gen the next command List");
 			this.gameInformation.put("now_turns", ++nowTurns);
+			
 			if (nowTurns > totalTurns) {
-				((GameUserProcessService) ApplicationContextHolder
+				logger.debug("game over !");
+				((GameStartAndEndProcessService) ApplicationContextHolder
 						.getApplicationContext().getBean(
-								"gameUserProcessService"))
-						.gameEndProcess(this.userId);
+								"gameStartAndEndProcessService"))
+						.gameEndProcess(this.getApplicationData(),this.getId());
 			}
 			this.gameInformation.put(
 					"command",
@@ -211,7 +212,7 @@ public class GameProcessAction extends ActionSupport {
 	}
 
 	public boolean isAllDone(List<UserStatusInTurn> command) {
-		
+
 		Iterator<UserStatusInTurn> it = command.iterator();
 		while (it.hasNext()) {
 			UserStatusInTurn user = it.next();

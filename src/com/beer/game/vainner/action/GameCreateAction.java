@@ -8,12 +8,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.beer.common.utility.ApplicationContextHolder;
+import com.beer.common.utility.SessionFactoryHolder;
+import com.beer.game.vainner.dao.GameDAO;
 import com.beer.game.vainner.model.Game;
 import com.beer.game.vainner.model.GameProducerParameter;
 import com.beer.game.vainner.model.GameRetailParameter;
 import com.beer.game.vainner.model.GameWholesaleParameter;
-import com.beer.game.vainner.service.GameCreateService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -50,12 +50,12 @@ public class GameCreateAction extends ActionSupport {
 		return "index";
 	}
 
+	@SuppressWarnings("unchecked")
 	public String create() {
-
 
 		if (!needPassword)
 			password = "vainner-no-password";
-		
+
 		Game game = new Game();
 		game.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		game.setGameTitle(gameTitle);
@@ -66,49 +66,51 @@ public class GameCreateAction extends ActionSupport {
 		game.setRetailNumber(retailNumber);
 		game.setWholesaleNumber(wholesaleNumber);
 		game.setProducerNumber(producerNumber);
-		GameCreateService gameCreateService = (GameCreateService) ApplicationContextHolder
-				.getApplicationContext().getBean("gameCreateService");
-		Map<String, String> result = gameCreateService.add(game, retail,
-				wholesale, producer);
+		SessionFactoryHolder.getSession().beginTransaction();
+		new GameDAO().save(game);
+		SessionFactoryHolder.getSession().getTransaction().commit();
 
-		if (result.size() == 0) {
+		String applicationDataKey = "room" + game.getGameId();
+		log.debug("game room application key =  " + applicationDataKey);
+		HashMap<String, Object> gameInformation = new HashMap<String, Object>(); // 创建游戏房间的信息
+		gameInformation.put("retailConfig", retail);
+		gameInformation.put("wholesaleConfig", wholesale);
+		gameInformation.put("producerConfig", producer);
+		gameInformation.put("game", game);
+		List<String> retailPerson = new LinkedList<String>();
+		List<String> wholesalePerson = new LinkedList<String>();
+		List<String> producerPerson = new LinkedList<String>();
+		List<String> message = new LinkedList<String>();
 
-			String applicationDataKey = "room" + game.getGameId();
-			log.debug("游戏房间application的键值是 ： " + applicationDataKey);
-			HashMap<String, Object> gameInformation = new HashMap<String, Object>(); // 创建游戏房间的信息
-			List<String> retail = new LinkedList<String>();
-			List<String> wholesale = new LinkedList<String>();
-			List<String> producer = new LinkedList<String>();
-			List<String> message = new LinkedList<String>();
-			message.add(this.session.get("username") + "创建了房间！");
-			retail.add((String) this.getSession().get("username")); // 把创建者先放入零售商里面
-			gameInformation.put("holder", this.getSession().get("username")); // 写入房主信息
-			gameInformation.put("retail", retail); // 放入三个表
-			gameInformation.put("wholesale", wholesale);
-			gameInformation.put("producer", producer);
-			gameInformation.put("total", new Integer(retailNumber
-					+ wholesaleNumber + producerNumber));
-			gameInformation.put((String) this.session.get("username"),
-					new Boolean(true));
-			gameInformation.put("retailNumber",
-					new Integer(game.getRetailNumber()));
-			gameInformation.put("wholesaleNumber",
-					new Integer(game.getWholesaleNumber()));
-			gameInformation.put("producerNumber",
-					new Integer(game.getProducerNumber()));
-			gameInformation.put("message", message);
-			gameInformation.put("turns",game.getAllTimes());
-			gameInformation.put("time",game.getOnceTime());
-			gameInformation.put("now_turns",1);
-			gameInformation.put("start", false);
-			this.getApplicationData().put(applicationDataKey, gameInformation); // 写入信息
-			this.setGameId(game.getGameId());
-			return "success";
-		} else {
-			for (String key : result.keySet())
-				this.addFieldError(key, result.get(key));
-			return "error";
-		}
+		message.add(this.session.get("username") + "创建了房间！");
+		retailPerson.add((String) this.getSession().get("username")); // 把创建者先放入零售商里面
+
+		gameInformation.put("holder", this.getSession().get("username")); // 写入房主信息
+		gameInformation.put("retail", retailPerson); // 放入三个表
+		gameInformation.put("wholesale", wholesalePerson);
+		gameInformation.put("producer", producerPerson);
+		gameInformation.put("total", new Integer(retailNumber + wholesaleNumber
+				+ producerNumber));
+		gameInformation.put((String) this.session.get("username"), new Boolean(
+				true));
+		gameInformation
+				.put("retailNumber", new Integer(game.getRetailNumber()));
+		gameInformation.put("wholesaleNumber",
+				new Integer(game.getWholesaleNumber()));
+		gameInformation.put("producerNumber",
+				new Integer(game.getProducerNumber()));
+		gameInformation.put("message", message);
+		gameInformation.put("turns", game.getAllTimes());
+		gameInformation.put("time", game.getOnceTime());
+		gameInformation.put("now_turns", 1);
+		gameInformation.put("start", false);
+		this.getApplicationData().put(applicationDataKey, gameInformation); // 写入信息
+		this.setGameId(game.getGameId());
+
+		List<Integer> games = (List<Integer>)this.getApplicationData().get("games");
+		games.add(game.getGameId());
+
+		return "success";
 	}
 
 	public int getRetailNumber() {

@@ -5,9 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.beer.common.utility.ApplicationContextHolder;
 import com.beer.game.vainner.model.Game;
-import com.beer.game.vainner.service.GameWaitService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -43,7 +41,7 @@ public class GameWaitAction extends ActionSupport {
 		List<String> wholesale = (List<String>) gameInformation
 				.get("wholesale");
 		List<String> producer = (List<String>) gameInformation.get("producer");
-		List<String> message  = (List<String>) gameInformation.get("message");
+		List<String> message = (List<String>) gameInformation.get("message");
 		Integer total = (Integer) gameInformation.get("total"); // 读出角色信息
 
 		this.retailNumber = (Integer) gameInformation.get("retailNumber");
@@ -76,7 +74,7 @@ public class GameWaitAction extends ActionSupport {
 			gameInformation.put((String) this.getSession().get("username"),
 					true);
 		}
-		
+
 		log.debug("目前人数 : ");
 		log.debug("零售商人数" + retail.size());
 		log.debug("批发商人数" + wholesale.size());

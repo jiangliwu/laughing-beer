@@ -1,5 +1,6 @@
 package com.beer.game.vainner.action;
 
+import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,11 +9,14 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.beer.common.utility.ApplicationContextHolder;
+import com.beer.game.vainner.dao.GameDAO;
 import com.beer.game.vainner.model.Game;
+import com.beer.game.vainner.model.GameProducerRecord;
 import com.beer.game.vainner.model.GameRetailRecord;
+import com.beer.game.vainner.model.GameWholesalerRecord;
 import com.beer.game.vainner.model.UserStatusInTurn;
 import com.beer.game.vainner.service.GameRecordInitService;
-import com.beer.game.vainner.service.GameUserProcessService;
+import com.beer.game.vainner.service.GameStartAndEndProcessService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -27,12 +31,10 @@ public class GameStartAction extends ActionSupport {
 	private Map<String, Object> session;
 	private Map<String, Object> applicationData;
 	private Logger logger = Logger.getLogger(GameStartAction.class);
-	private int userId;
 
 	public GameStartAction() {
 		this.setSession(ActionContext.getContext().getSession());
 		this.setApplicationData(ActionContext.getContext().getApplication());
-		this.userId = (Integer) this.getSession().get("id");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,10 +55,15 @@ public class GameStartAction extends ActionSupport {
 		}
 
 		List<String> retail = (List<String>) gameInformation.get("retail");
+		Game game = new GameDAO().findById(this.getId());
+		game.setStartTime(new Timestamp(System.currentTimeMillis()));
+		game.setGameStauts(1);
+		
 		List<String> wholesale = (List<String>) gameInformation
 				.get("wholesale");
 		List<String> producer = (List<String>) gameInformation.get("producer");
 
+		String holderName = (String) gameInformation.get("holder");
 		if (userIsInRoom(retail, wholesale, producer, username).equals("")) {
 			return "not_in_room";
 		}
@@ -104,48 +111,60 @@ public class GameStartAction extends ActionSupport {
 					.getApplicationContext().getBean("gameRecordInitService");
 
 			// add record
-			gameInformation.put("retailRecord",
-					gameRecordInitService.getFirstRetailRecord(this.getId()));
-			gameInformation.put("wholesaleRecord",
-					gameRecordInitService.getFirstWholeRecord(this.getId()));
-			gameInformation.put("producerRecord",
-					gameRecordInitService.getFirstProducerRecord(this.getId()));
+			gameInformation.put("retailRecord", gameRecordInitService
+					.getFirstRetailRecord(this.getId(), gameInformation));
+			gameInformation.put("retailRecordList",
+					new LinkedList<GameRetailRecord>());
+
+			gameInformation.put("wholesaleRecord", gameRecordInitService
+					.getFirstWholeRecord(this.getId(), gameInformation));
+			gameInformation.put("wholesaleRecordList",
+					new LinkedList<GameWholesalerRecord>());
+
+			gameInformation.put("producerRecord", gameRecordInitService
+					.getFirstProducerRecord(this.getId(), gameInformation));
+			gameInformation.put("producerRecordList",
+					new LinkedList<GameProducerRecord>());
+
 			gameInformation.put("command", command);
 			gameInformation.put("start", true);
-			
-			GameUserProcessService gameUserProcessService = (GameUserProcessService) ApplicationContextHolder
-					.getApplicationContext().getBean("gameUserProcessService");
-			gameUserProcessService.gameStartProcess(this.userId, this.getId(),
-					this.getIdentify(retail, wholesale, retail, username));
-			
+
+			this.saveUserGameInformation(retail, wholesale, producer,
+					holderName);
 			logger.debug("room  " + this.getId()
-					+ "init Done , start success !");
+					+ " init Done , start success !");
 		}
 
 		return "success";
 	}
 
-	public int getIdentify(List<String> a, List<String> b, List<String> c,
-			String username) {
+	public void saveUserGameInformation(List<String> a, List<String> b,
+			List<String> c, String holderName) {
+		GameStartAndEndProcessService gameUserProcessService = (GameStartAndEndProcessService) ApplicationContextHolder
+				.getApplicationContext().getBean(
+						"gameStartAndEndProcessService");
 		Iterator<String> it = a.iterator();
 		while (it.hasNext()) {
 			String name = it.next();
-			if (name.equals(username))
-				return 1;
+			gameUserProcessService.gameStartProcess(name, this.getId(), 1,
+					this.getIsHolder(holderName, name));
 		}
 		it = b.iterator();
 		while (it.hasNext()) {
 			String name = it.next();
-			if (name.equals(username))
-				return 2;
+			gameUserProcessService.gameStartProcess(name, this.getId(), 2,
+					this.getIsHolder(holderName, name));
 		}
 		it = c.iterator();
 		while (it.hasNext()) {
 			String name = it.next();
-			if (name.equals(username))
-				return 3;
+			gameUserProcessService.gameStartProcess(name, this.getId(), 3,
+					this.getIsHolder(holderName, name));
 		}
-		return 0;
+	}
+
+	public boolean getIsHolder(String holdName, String username) {
+		return holdName.equals(username);
 	}
 
 	public String userIsInRoom(List<String> a, List<String> b, List<String> c,

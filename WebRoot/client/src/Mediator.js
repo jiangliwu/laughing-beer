@@ -33,7 +33,7 @@ function Mediator() {
 	this.postTurnData = function() {
 		var self = this;
 		var send = parseInt(Math.random() * 100) % 8;
-		cc.log("command = " +self._command);
+		cc.log("command = " + self._command);
 		if (self._command.indexOf("send") < 0)
 			send = 0;
 		var book = parseInt(Math.random() * 100) % 10;
@@ -58,14 +58,20 @@ function Mediator() {
 			type : "GET",
 			url : link,
 			success : function(data) {
+
 				var ret = data.split("((((")[1];
+				cc.log("gets , ret =" + ret);
 				if (ret == "gameOver") {
 					cc.log("game over!");
-					window.location.href = "game_show_record?id="+getParameter("id");
+					window.location.href = "game_show_record?id="
+							+ getParameter("id");
 				} else if (ret == "no-event") {
 					self._timer.showMessage("这周无事可做");
 				} else if (ret == "wait") {
 					self._timer.showMessage("等待下一周！");
+
+				} else if (ret == undefined) {
+					cc.log("pass");
 				} else {
 					self._details.updateInformationFromServer();
 					self._timer.showMessage("");
@@ -73,7 +79,6 @@ function Mediator() {
 					self._isGeted = true;
 					self._command = ret;
 					self._timer.updateNowTurns();
-
 					self._postForm.reset(ret);
 				}
 			}

@@ -86,10 +86,10 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span> </a>
-				<s:a value="/index.html" cssClass="brand">Laughing-beer</s:a>
+				<s:a value="index" cssClass="brand">Laughing-beer</s:a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><s:a value="/index">
+						<li><s:a value="index">
 								<i class="icon-home"></i> 主页</s:a>
 						</li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -99,25 +99,29 @@
 								</li>
 								<li><s:a action="game_create!index"
 										 includeParams="none">创建游戏</s:a></li>
-								<li><s:a action="index" namespace="/config-browser"
+								<li><s:a action="dev"
 										includeParams="none">加入游戏</s:a>
 								</li>
-								<li><s:a value="/conversion/index.jsp">浏览我的记录</s:a>
+								<li><s:a action="game_hall!mygame"
+										>浏览我的记录</s:a>
 								</li>
-								<li><s:a value="/person/index.jsp">Person Manager ( by Conventions )</s:a>
+								<li><s:a action="dev"
+										includeParams="none">Person Manager ( by Conventions )</s:a>
 								</li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">工具<b class="caret"></b> </a>
 							<ul class="dropdown-menu">
-								<li><s:a action="actionChain1!input"
-										namespace="/actionchaining" includeParams="none">模拟供应链</s:a></li>
-								<li><s:a action="index" namespace="/config-browser"
+								<li><s:a action="dev"
+										includeParams="none" >模拟供应链</s:a></li>
+								<li><s:a action="dev"
 										includeParams="none">供应链数据分析</s:a>
 								</li>
-								<li><s:a value="/conversion/index.jsp">浏览我的记录</s:a>
+								<li><s:a action="dev"
+										includeParams="none">浏览我的记录</s:a>
 								</li>
-								<li><s:a value="/person/index.jsp">Person Manager ( by Conventions )</s:a>
+								<li><s:a action="dev"
+										includeParams="none">Person Manager ( by Conventions )</s:a>
 								</li>
 							</ul></li>
 
