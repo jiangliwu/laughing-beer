@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
+
+import com.beer.common.utility.SessionFactoryHolder;
 import com.beer.user.vainner.dao.UserDAO;
 import com.beer.user.vainner.model.User;
 
@@ -45,7 +47,9 @@ public class UserService {
 			flag = false;
 		}
 		if (flag) {
+			SessionFactoryHolder.getSession().beginTransaction();
 			this.userDAO.save(user);
+			SessionFactoryHolder.getSession().getTransaction().commit();
 		}
 		return result;
 	}

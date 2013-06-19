@@ -26,6 +26,7 @@ public class GameWholesalerRecord implements java.io.Serializable {
 	private Integer gameId;
 	private Integer times;
 	private Integer userId;
+	private double totalProfilt;
 
 	// Constructors
 
@@ -205,14 +206,17 @@ public class GameWholesalerRecord implements java.io.Serializable {
 		this.userId = userId;
 	}
 
+	public Double getTotalProfilt() {
+		return totalProfilt;
+	}
+
+	public void setTotalProfilt(Double totalProfilt) {
+		this.totalProfilt = totalProfilt;
+	}
+
 	public String toString() {
-		return this.getThisTimeBuy() + "," + this.getAllNeed() + ","
-				+ this.getActualSale() + "," + this.getAllOwe() + ","
-				+ this.getDelayCost() + "," + this.getBeginGoods() + ","
-				+ this.getReceiveGoods() + "," + this.getReceiveGoods()
-				+ "," + this.getTotalUpOweGoods() + "," + this.getEndGoods()
-				+ "," + this.getStorageCost() + "," + this.getOrderGoods()
-				+ "," + this.getTotalOrderGoods() + ","
-				+ this.getThisTimeProfit();
+		return this.getThisTimeBuy() + "," + this.getAllOwe() + ","
+				+ this.getEndGoods() + "," + this.getTotalUpOweGoods() + ","
+				+ this.getThisTimeProfit() + "," + this.getTotalProfilt();
 	}
 }

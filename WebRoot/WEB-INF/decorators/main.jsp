@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <%
 	response.setHeader("Pragma", "no-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -19,7 +17,7 @@
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
-<%@taglib prefix="sx" uri="/struts-dojo-tags" %>
+
 <html lang="en">
 <head>
 <base href="<%=basePath%>">
@@ -33,6 +31,7 @@
 <title><decorator:title default="laughing-beer" />
 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="favicon.ico" rel="shortcut icon" />
 <link
 	href="<s:url value='assets/css/bootstrap.css' encode='false' includeParams='none'/>"
 	rel="stylesheet" type="text/css" media="all">
@@ -45,11 +44,13 @@
 
 <script
 	src="<s:url value='assets/js/jquery-1.8.2.min.js' encode='false' includeParams='none'/>"></script>
-	<script
+<script
 	src="<s:url value='assets/js/application.js' encode='false' includeParams='none'/>"></script>
-	
+
 <script
 	src="<s:url value='assets/js/tools.js' encode='false' includeParams='none'/>"></script>
+<script
+	src="<s:url value='assets/js/jquery.backtotop.js' encode='false' includeParams='none'/>"></script>
 <script
 	src="<s:url value='assets/js/bootstrap.min.js' encode='false' includeParams='none'/>"></script>
 <script type="text/javascript">
@@ -97,31 +98,23 @@
 							<ul class="dropdown-menu">
 								<li><s:a action="game_hall" includeParams="none">游戏大厅</s:a>
 								</li>
-								<li><s:a action="game_create!index"
-										 includeParams="none">创建游戏</s:a></li>
-								<li><s:a action="dev"
-										includeParams="none">加入游戏</s:a>
+								<li><s:a action="game_create!index" includeParams="none">创建游戏</s:a>
 								</li>
-								<li><s:a action="game_hall!mygame"
-										>浏览我的记录</s:a>
+								<li><s:a action="dev" includeParams="none">加入游戏</s:a>
 								</li>
-								<li><s:a action="dev"
-										includeParams="none">Person Manager ( by Conventions )</s:a>
+								<li><s:a action="game_hall!mygame">浏览我的记录</s:a></li>
+								<li><s:a action="dev" includeParams="none">Person Manager ( by Conventions )</s:a>
 								</li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">工具<b class="caret"></b> </a>
 							<ul class="dropdown-menu">
-								<li><s:a action="dev"
-										includeParams="none" >模拟供应链</s:a></li>
-								<li><s:a action="dev"
-										includeParams="none">供应链数据分析</s:a>
+								<li><s:a action="dev" includeParams="none">模拟供应链</s:a></li>
+								<li><s:a action="dev" includeParams="none">供应链数据分析</s:a>
 								</li>
-								<li><s:a action="dev"
-										includeParams="none">浏览我的记录</s:a>
+								<li><s:a action="dev" includeParams="none">浏览我的记录</s:a>
 								</li>
-								<li><s:a action="dev"
-										includeParams="none">Person Manager ( by Conventions )</s:a>
+								<li><s:a action="dev" includeParams="none">Person Manager ( by Conventions )</s:a>
 								</li>
 							</ul></li>
 
@@ -141,7 +134,7 @@
 						<%
 							} else {
 						%>
-						<li><s:a action="user_edit">修改资料</s:a>
+						<li><s:a action="dev" includeParams="none">修改资料</s:a>
 						</li>
 						<li><s:a action="user_logout">退出系统(<%=request.getSession().getAttribute("username")%>)</s:a>
 						</li>
@@ -174,11 +167,14 @@
 	<div id="footer">
 		<div class="container">
 			<p class="muted credit">
-				Copyright &copy; 2003-2013 <a
-					href="http://www.localhost:8080/laughing-beer/"> 供应链 </a>
+				Copyright &copy; 2003-2014 <a
+					href="http://www.localhost:8080/laughing-beer/"> 黑方软件 - 供应链系统 alpha 1.0 </a>
 			</p>
 			<p class="pull-right">
-				<a href="#">Back to top</a>
+				<a href = "" id="back-to-top">回到顶部</a>
+				<script type="text/javascript">
+					$("#back-to-top").click(function(e) {e.preventDefault();}).backToTop();
+				</script>
 			</p>
 		</div>
 	</div>

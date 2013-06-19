@@ -121,9 +121,8 @@ public class GameRetailParameter implements java.io.Serializable {
 	}
 
 	public String toString() {
-		return "retail config :" + this.price + " " + this.delayCost + " "
-				+ this.repertoryCost + " " + this.orderCost + " "
-				+ this.transportCost + " " + this.discount + " " + this.origin
-				+ " " + this.cost;
+		return this.price + "," + this.cost + "," + this.delayCost + ","
+				+ this.repertoryCost + "," + this.orderCost + ","
+				+ this.transportCost;
 	}
 }

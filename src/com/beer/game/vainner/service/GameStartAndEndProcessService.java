@@ -46,17 +46,17 @@ public class GameStartAndEndProcessService {
 	private static Logger log = Logger
 			.getLogger(GameStartAndEndProcessService.class);
 
-	public void gameStartProcess(String username, int gameId, int identify,
+	public void gameStartProcess(String username, Game game, int identify,
 			boolean isHolder) {
 		List<?> users = this.getUserDAO().findByUsername(username);
 		if (users.size() == 0)
 			return;
 		User user = (User) users.get(0);
 		user.setInGame(1);
-		user.setGameRoomId(gameId);
+		user.setGameRoomId(game.getGameId());
 
 		UserGame userGame = new UserGame();
-		userGame.setGame(this.getGameDAO().findById(gameId));
+		userGame.setGame(game);
 		userGame.setUser(user);
 		userGame.setGameRole(identify);
 		userGame.setGameHolder(isHolder ? 1 : 0);
@@ -87,7 +87,7 @@ public class GameStartAndEndProcessService {
 				.get("wholesaleConfig");
 		GameProducerParameter producerPara = (GameProducerParameter) room
 				.get("producerConfig");
-		Game game = new GameDAO().findById(gameId);
+		Game game = (Game) room.get("game");
 		List<GameRetailRecord> gameRetailRecordList = (List<GameRetailRecord>) room
 				.get("retailRecordList");
 		List<GameWholesalerRecord> gameWholesalerRecordList = (List<GameWholesalerRecord>) room
@@ -100,6 +100,10 @@ public class GameStartAndEndProcessService {
 		this.saveRecords(gameRetailRecordList, gameWholesalerRecordList,
 				gameProducerRecordList);
 		this.removeRoomFromList(games, gameId);
+		room.clear();
+		application.put(applicationDataKey, null);
+		SessionFactoryHolder.getSession().flush();
+
 	}
 
 	private void removeRoomFromList(List<Integer> games, int gameId) {
@@ -114,7 +118,7 @@ public class GameStartAndEndProcessService {
 		}
 		if (needRemove != null)
 			games.remove(needRemove);
-		
+
 		log.debug("remove from list success!");
 	}
 
@@ -141,12 +145,13 @@ public class GameStartAndEndProcessService {
 	private void saveGameConfig(Game game, GameRetailParameter retailPara,
 			GameWholesaleParameter wholesalePara,
 			GameProducerParameter producerPara) {
-
-		game.setEndTime(new Timestamp(System.currentTimeMillis()));
-		game.setGameStauts(2);
+		Game updateGame = new GameDAO().findById(game.getGameId());
+		updateGame.setEndTime(new Timestamp(System.currentTimeMillis()));
+		updateGame.setStartTime(game.getStartTime());
+		updateGame.setGameStauts(2);
 		GameRoomStatusService gameStatus = (GameRoomStatusService) ApplicationContextHolder
 				.getApplicationContext().getBean("gameRoomStatusService");
-		gameStatus.add(game, retailPara, wholesalePara, producerPara);
+		gameStatus.add(updateGame, retailPara, wholesalePara, producerPara);
 
 		log.debug("game para save success !!");
 	}

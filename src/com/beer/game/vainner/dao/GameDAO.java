@@ -25,6 +25,7 @@ public class GameDAO extends BaseHibernateDAO {
 		Session session = this.getSession();
 		try {
 			session.save(transientInstance);
+			System.out.println(transientInstance.getGameTitle());
 			log.debug(transientInstance.getGameTitle());
 			log.debug("save successful");
 		} catch (RuntimeException re) {

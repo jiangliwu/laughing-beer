@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.beer.common.utility.ApplicationContextHolder;
-import com.beer.game.vainner.dao.GameDAO;
 import com.beer.game.vainner.model.Game;
 import com.beer.game.vainner.model.GameProducerRecord;
 import com.beer.game.vainner.model.GameRetailRecord;
@@ -55,10 +54,10 @@ public class GameStartAction extends ActionSupport {
 		}
 
 		List<String> retail = (List<String>) gameInformation.get("retail");
-		Game game = new GameDAO().findById(this.getId());
+		Game game = (Game) gameInformation.get("game");
 		game.setStartTime(new Timestamp(System.currentTimeMillis()));
 		game.setGameStauts(1);
-		
+
 		List<String> wholesale = (List<String>) gameInformation
 				.get("wholesale");
 		List<String> producer = (List<String>) gameInformation.get("producer");
@@ -93,8 +92,8 @@ public class GameStartAction extends ActionSupport {
 				String name = it.next();
 				UserStatusInTurn user = new UserStatusInTurn();
 				user.setUsername(name);
-				user.setOp("");
-				user.setDone(true);
+				user.setOp("book");
+				//user.setDone(true);
 				command.add(user);
 			}
 			it = producer.iterator();
@@ -130,7 +129,7 @@ public class GameStartAction extends ActionSupport {
 			gameInformation.put("start", true);
 
 			this.saveUserGameInformation(retail, wholesale, producer,
-					holderName);
+					holderName, game);
 			logger.debug("room  " + this.getId()
 					+ " init Done , start success !");
 		}
@@ -139,26 +138,26 @@ public class GameStartAction extends ActionSupport {
 	}
 
 	public void saveUserGameInformation(List<String> a, List<String> b,
-			List<String> c, String holderName) {
+			List<String> c, String holderName, Game game) {
 		GameStartAndEndProcessService gameUserProcessService = (GameStartAndEndProcessService) ApplicationContextHolder
 				.getApplicationContext().getBean(
 						"gameStartAndEndProcessService");
 		Iterator<String> it = a.iterator();
 		while (it.hasNext()) {
 			String name = it.next();
-			gameUserProcessService.gameStartProcess(name, this.getId(), 1,
+			gameUserProcessService.gameStartProcess(name, game, 1,
 					this.getIsHolder(holderName, name));
 		}
 		it = b.iterator();
 		while (it.hasNext()) {
 			String name = it.next();
-			gameUserProcessService.gameStartProcess(name, this.getId(), 2,
+			gameUserProcessService.gameStartProcess(name, game, 2,
 					this.getIsHolder(holderName, name));
 		}
 		it = c.iterator();
 		while (it.hasNext()) {
 			String name = it.next();
-			gameUserProcessService.gameStartProcess(name, this.getId(), 3,
+			gameUserProcessService.gameStartProcess(name, game, 3,
 					this.getIsHolder(holderName, name));
 		}
 	}

@@ -38,6 +38,9 @@ public class GameCreateAction extends ActionSupport {
 	private int gameId;
 	private static Logger log = Logger.getLogger(GameCreateAction.class);
 
+	private int randomRetail;
+	private int randomWholesale;
+	private int randomProducer;
 	private Map<String, Object> session;
 	private Map<String, Object> applicationData;
 
@@ -47,6 +50,9 @@ public class GameCreateAction extends ActionSupport {
 	}
 
 	public String index() {
+		this.setRandomRetail((int) (Math.random() * 6) + 10);
+		this.setRandomWholesale((int) (Math.random() * 6) + 20);
+		this.setRandomProducer((int)( Math.random() * 8) + 28);
 		return "index";
 	}
 
@@ -77,6 +83,7 @@ public class GameCreateAction extends ActionSupport {
 		gameInformation.put("wholesaleConfig", wholesale);
 		gameInformation.put("producerConfig", producer);
 		gameInformation.put("game", game);
+
 		List<String> retailPerson = new LinkedList<String>();
 		List<String> wholesalePerson = new LinkedList<String>();
 		List<String> producerPerson = new LinkedList<String>();
@@ -107,7 +114,8 @@ public class GameCreateAction extends ActionSupport {
 		this.getApplicationData().put(applicationDataKey, gameInformation); // 写入信息
 		this.setGameId(game.getGameId());
 
-		List<Integer> games = (List<Integer>)this.getApplicationData().get("games");
+		List<Integer> games = (List<Integer>) this.getApplicationData().get(
+				"games");
 		games.add(game.getGameId());
 
 		return "success";
@@ -223,6 +231,30 @@ public class GameCreateAction extends ActionSupport {
 
 	public void setGameId(int gameId) {
 		this.gameId = gameId;
+	}
+
+	public int getRandomRetail() {
+		return randomRetail;
+	}
+
+	public void setRandomRetail(int randomRetail) {
+		this.randomRetail = randomRetail;
+	}
+
+	public int getRandomWholesale() {
+		return randomWholesale;
+	}
+
+	public void setRandomWholesale(int randomWholesale) {
+		this.randomWholesale = randomWholesale;
+	}
+
+	public int getRandomProducer() {
+		return randomProducer;
+	}
+
+	public void setRandomProducer(int randomProducer) {
+		this.randomProducer = randomProducer;
 	}
 
 }

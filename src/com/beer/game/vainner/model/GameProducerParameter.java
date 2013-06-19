@@ -1,9 +1,6 @@
 package com.beer.game.vainner.model;
 
-
-
-public  class GameProducerParameter implements
-		java.io.Serializable {
+public class GameProducerParameter implements java.io.Serializable {
 
 	// Fields
 
@@ -26,9 +23,9 @@ public  class GameProducerParameter implements
 	public GameProducerParameter() {
 	}
 
-	public GameProducerParameter(Double price, Double cost,
-			Double delayCost, Double repertoryCost, Double startCost,
-			Double discount, Double origin, Integer gameId) {
+	public GameProducerParameter(Double price, Double cost, Double delayCost,
+			Double repertoryCost, Double startCost, Double discount,
+			Double origin, Integer gameId) {
 		this.price = price;
 		this.cost = cost;
 		this.delayCost = delayCost;
@@ -112,12 +109,9 @@ public  class GameProducerParameter implements
 	public void setGameId(Integer gameId) {
 		this.gameId = gameId;
 	}
-	
-	
+
 	public String toString() {
-		return "producer config :" + this.price + " " + this.delayCost + " "
-				+ this.repertoryCost + " " + this.startCost + " "
-				+ " " + this.discount + " " + this.origin
-				+ " " + this.cost;
+		return this.price + "," + this.cost + "," + this.delayCost + ","
+				+ this.repertoryCost + "," + this.startCost;
 	}
 }

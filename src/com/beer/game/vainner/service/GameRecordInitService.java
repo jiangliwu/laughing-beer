@@ -7,7 +7,6 @@ package com.beer.game.vainner.service;
 
 import java.util.Map;
 
-
 import org.springframework.stereotype.Component;
 
 import com.beer.game.vainner.model.GameProducerParameter;
@@ -43,18 +42,17 @@ public class GameRecordInitService {
 				* tmp.getRepertoryCost());
 		ret.setOrderGoods(0.0);
 		ret.setTotalOrderGoods(0.0);
-		ret.setThisTimeProfit((tmp.getPrice() - tmp.getCost())
-				* ret.getActualSale() - ret.getDelayCost()
-				- ret.getStorageCost());
-
-		// - (ret.getReceiveGoods() == 0.0 ? 0 : tmp.getTransportCost())
-		// - ret.getOrderGoods() == 0.0 ? 0 : tmp.getOrderCost());
-		if (ret.getReceiveGoods() > 0.01)
-			ret.setThisTimeProfit(ret.getThisTimeProfit()
-					- tmp.getTransportCost());
-		if (ret.getOrderGoods() > 0.01)
-			ret.setThisTimeProfit(ret.getThisTimeProfit() - tmp.getOrderCost());
-
+		ret.setTotalProfilt(0.0);
+		/*
+		 * ret.setThisTimeProfit((tmp.getPrice() - tmp.getCost())
+		 * ret.getActualSale() - ret.getDelayCost() - ret.getStorageCost());
+		 * 
+		 * if (ret.getReceiveGoods() > 0.01)
+		 * ret.setThisTimeProfit(ret.getThisTimeProfit() -
+		 * tmp.getTransportCost()); if (ret.getOrderGoods() > 0.01)
+		 * ret.setThisTimeProfit(ret.getThisTimeProfit() - tmp.getOrderCost());
+		 */
+		ret.setThisTimeProfit(0.0);
 		return ret;
 	}
 
@@ -77,16 +75,20 @@ public class GameRecordInitService {
 		ret.setStorageCost((ret.getBeginGoods() + ret.getEndGoods()) * 0.5
 				* tmp.getRepertoryCost());
 		ret.setOrderGoods(0.0);
+		ret.setTotalProfilt(0.0);
 		ret.setTotalOrderGoods(0.0);
-		ret.setThisTimeProfit((tmp.getPrice() - tmp.getCost())
-				* ret.getActualSale() - ret.getDelayCost()
-				- ret.getStorageCost());
 
-		if (ret.getReceiveGoods() > 0.01)
-			ret.setThisTimeProfit(ret.getThisTimeProfit()
-					- tmp.getTransportCost());
-		if (ret.getOrderGoods() > 0.01)
-			ret.setThisTimeProfit(ret.getThisTimeProfit() - tmp.getOrderCost());
+		/*
+		 * ret.setThisTimeProfit((tmp.getPrice() - tmp.getCost())
+		 * ret.getActualSale() - ret.getDelayCost() - ret.getStorageCost());
+		 * 
+		 * if (ret.getReceiveGoods() > 0.01)
+		 * ret.setThisTimeProfit(ret.getThisTimeProfit() -
+		 * tmp.getTransportCost()); if (ret.getOrderGoods() > 0.01)
+		 * ret.setThisTimeProfit(ret.getThisTimeProfit() - tmp.getOrderCost());
+		 */
+
+		ret.setThisTimeProfit(0.0);
 		return ret;
 	}
 
@@ -108,12 +110,16 @@ public class GameRecordInitService {
 		ret.setStorageCost((ret.getBeginGoods() + ret.getEndGoods()) * 0.5
 				* tmp.getRepertoryCost());
 		ret.setOrderGoods(0.0);
-		ret.setThisTimeProfit((tmp.getPrice() - tmp.getCost())
-				* ret.getActualSale() - ret.getDelayCost()
-				- ret.getStorageCost());
+		ret.setTotalProfilt(0.0);
 
-		if (ret.getOrderGoods() > 0.01)
-			ret.setThisTimeProfit(ret.getThisTimeProfit() - tmp.getStartCost());
+		/*
+		 * ret.setThisTimeProfit((tmp.getPrice() - tmp.getCost())
+		 * ret.getActualSale() - ret.getDelayCost() - ret.getStorageCost());
+		 * 
+		 * if (ret.getOrderGoods() > 0.01)
+		 * ret.setThisTimeProfit(ret.getThisTimeProfit() - tmp.getStartCost());
+		 */
+		ret.setThisTimeProfit(0.0);
 		return ret;
 	}
 

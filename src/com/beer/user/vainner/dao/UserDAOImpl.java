@@ -19,7 +19,6 @@ public class UserDAOImpl implements UserDAO {
 		log.debug("UserDAOImpl 开始 " + user);
 		Session session = SessionFactoryHolder.getSession();
 		try {
-
 			session.save(user);
 
 			log.debug("UserDAOImpl  保存成功! " + user);

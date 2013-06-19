@@ -5,7 +5,6 @@
  */
 package com.beer.game.vainner.action;
 
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -111,18 +110,18 @@ public class GameProcessAction extends ActionSupport {
 			logger.debug("turns " + nowTurns
 					+ " is Done , now gen the next command List");
 			this.gameInformation.put("now_turns", ++nowTurns);
-			
+
 			if (nowTurns > totalTurns) {
-				logger.debug("game over !");
 				((GameStartAndEndProcessService) ApplicationContextHolder
 						.getApplicationContext().getBean(
 								"gameStartAndEndProcessService"))
-						.gameEndProcess(this.getApplicationData(),this.getId());
+						.gameEndProcess(this.getApplicationData(), this.getId());
+			} else {
+				this.gameInformation.put(
+						"command",
+						genNextTurnCommand(command, retail, wholesale,
+								producer, nowTurns));
 			}
-			this.gameInformation.put(
-					"command",
-					genNextTurnCommand(command, retail, wholesale, producer,
-							nowTurns));
 			return "done";
 		}
 		return "no-event";
@@ -141,7 +140,7 @@ public class GameProcessAction extends ActionSupport {
 		wholeSaleUser.setUsername(wholesale.get(0));
 		producerUser.setUsername(producer.get(0));
 
-		retailUser.setOrder(new Random().nextInt() % 10);
+		retailUser.setOrder(((new Random().nextInt() % 10) + 10) % 10);
 		retailUser.setReceive(command.get(1).getSend());
 		wholeSaleUser.setOrder(command.get(0).getBook());
 		wholeSaleUser.setReceive(command.get(2).getSend());

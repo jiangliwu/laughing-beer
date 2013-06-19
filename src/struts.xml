@@ -45,14 +45,19 @@
 			<result name="success" type="redirect">game_wait!index?id=${gameId}
 			</result>
 			<result name="error">/game/game_create.jsp</result>
+			
 		</action>
 
 		<action name="game_wait" class="com.beer.game.vainner.action.GameWaitAction">
 			<result name="index">/game/game_wait.jsp</result>
+			<result name="full">/game/game_full.jsp</result>
+			<result name="not_exist">/game/game_not_exist.jsp</result>
 		</action>
 
 		<action name="game_start" class="com.beer.game.vainner.action.GameStartAction">
 			<result name="success">/game/game_play.jsp</result>
+			<result name="un_kown_room">/game/game_play_room_error.jsp</result>
+			<result name="not_in_room">/game/game_play_not_in_room.jsp</result>
 		</action>
 
 		<action name="game_process" class="com.beer.game.vainner.action.GameProcessAction">

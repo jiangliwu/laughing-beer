@@ -68,9 +68,10 @@
 										<s:submit cssClass="btn btn-danger" value="退出房间"></s:submit>
 									</form>
 									<%
-								} else {
+								}  else {
 									%>
-									<s:form action="" namespace="/">
+									<s:form action="game_wait!index" namespace="/">
+										<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 										<s:submit cssClass="btn btn-info" value="查看"></s:submit>
 									</s:form>
 									<%
@@ -125,7 +126,8 @@
 									<%
 								} else {
 									%>
-									<s:form action="" namespace="/">
+									<s:form action="game_wait!index" namespace="/">
+										<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 										<s:submit cssClass="btn btn-info" value="查看"></s:submit>
 									</s:form>
 									<%
@@ -177,7 +179,8 @@
 									<%
 								} else {
 									%>
-									<s:form action="" namespace="/">
+									<s:form action="game_wait!index" namespace="/">
+										<input  type="hidden" name="id" value="<%= request.getParameter("id") %>">
 										<s:submit cssClass="btn btn-info" value="查看"></s:submit>
 									</s:form>
 									<%
@@ -189,7 +192,7 @@
 				} else {
 			%>
 			<tr>
-				<td>批发商<%=i%></td>
+				<td>生产商<%=i%></td>
 				<td>空闲</td>
 				<td>
 							

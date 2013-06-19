@@ -23,7 +23,18 @@
 			}
 
 		})
+		
+		$('#show-record').tooltip().click(function(e) { // 控制批发商的显示
+			e.preventDefault()
+		}).on("click", function() {
+			if ($('#detail-record').is(":hidden")) {
+				$('#detail-record').css("display", "")
+			} else {
+				$('#detail-record').css("display", "none")
+			}
 
+		})
+		
 		$('#producer-config').tooltip().click(function(e) { // 控制生产的显示
 			e.preventDefault()
 		}).on("click", function() {

@@ -112,6 +112,9 @@ public class GameTurnsProcessService {
 			save.setThisTimeProfit(save.getThisTimeProfit()
 					- para.getOrderCost());
 
+		if (needSave)
+			save.setTotalProfilt(save.getThisTimeProfit() + pre.getTotalProfilt());
+		else save.setTotalProfilt(pre.getTotalProfilt());
 		save.setGameId(this.gameId);
 		save.setTimes(this.turns);
 		save.setUserId(this.userId);
@@ -134,7 +137,7 @@ public class GameTurnsProcessService {
 	@SuppressWarnings("unchecked")
 	public void saveWholesaleRecord(Map<String, Object> room, int order,
 			int receive, int send, int book, boolean needSave) {
-
+	
 		GameWholesalerRecord pre = (GameWholesalerRecord) room
 				.get("wholesaleRecord");
 
@@ -189,10 +192,14 @@ public class GameTurnsProcessService {
 			save.setThisTimeProfit(save.getThisTimeProfit()
 					- para.getOrderCost());
 
+		if (needSave)
+			save.setTotalProfilt(save.getThisTimeProfit() + pre.getTotalProfilt());
+		else save.setTotalProfilt(pre.getTotalProfilt());
 		save.setGameId(this.gameId);
 		save.setTimes(this.turns);
 		save.setUserId(this.userId);
 		room.put("wholesaleRecord", save);
+	
 		if (needSave) {
 			/*
 			 * Session tSession = SessionFactoryHolder.getSessionFactory()
@@ -255,6 +262,9 @@ public class GameTurnsProcessService {
 			save.setThisTimeProfit(save.getThisTimeProfit()
 					- para.getStartCost());
 
+		if (needSave)
+			save.setTotalProfilt(save.getThisTimeProfit() + pre.getTotalProfilt());
+		else save.setTotalProfilt(pre.getTotalProfilt());
 		save.setGameId(this.gameId);
 		save.setTimes(this.turns);
 		save.setUserId(this.userId);

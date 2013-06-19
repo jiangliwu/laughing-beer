@@ -6,7 +6,7 @@
         COCOS2D_DEBUG:2, //0 to turn debug off, 1 for basic debug, and 2 for full debug
         box2d:false,
         chipmunk:false,
-        showFPS:true,
+        showFPS:false,
         frameRate:60,
         loadExtension:false,
         tag:'gameCanvas', //the dom element to run cocos2d on
@@ -21,7 +21,10 @@
             prefix+'src/Tools.js',
             prefix+'src/config.js',
             prefix+'src/DetailsPanel.js',
-            prefix+'src/PostForm.js'
+            prefix+'src/PostForm.js',
+            prefix+'src/GameOver.js',
+            prefix+'src/TipBox.js',
+            prefix+'src/TipsManage.js',
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {

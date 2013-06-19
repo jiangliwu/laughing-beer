@@ -39,10 +39,16 @@ public class GameHallService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Game> getRun() {
-		List<Game> games = (List<Game>) new GameDAO().findByProperty(
-				GameDAO.GAME_STAUTS, 1);
-		return games;
+	public List<Game> getRun(Map<String, Object> application) {
+		List<Game> ret = new LinkedList<Game>();
+		List<Integer> games = (List<Integer>) application.get("games");
+		for (int i = 0; i < games.size(); i++) {
+			Game game = (Game) ((Map<String, Object>) application.get("room"
+					+ games.get(i))).get("game");
+			if (game.getGameStauts() == 1)
+				ret.add(game);
+		}
+		return ret;
 	}
 
 	public List<Game> getMyGame(int userId) {
@@ -51,8 +57,7 @@ public class GameHallService {
 		LinkedList<Game> ret = new LinkedList<Game>();
 		while (it.hasNext()) {
 			UserGame tmp = it.next();
-			if (tmp.getUser().getId() == userId)
-			{
+			if (tmp.getUser().getId() == userId) {
 				ret.add(tmp.getGame());
 			}
 		}

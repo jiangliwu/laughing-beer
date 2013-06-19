@@ -33,7 +33,7 @@ public class GameHallAction extends ActionSupport {
 	public String runing() {
 		GameHallService gameHallService = (GameHallService) ApplicationContextHolder
 				.getApplicationContext().getBean("gameHallService");
-		this.setGames(gameHallService.get(this.getApplicationData()));
+		this.setGames(gameHallService.getRun(this.getApplicationData()));
 		return "run";
 	}
 

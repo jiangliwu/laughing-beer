@@ -17,11 +17,12 @@
 			</li>
 			<li class="active">游戏大厅</li>
 		</ul>
-		<form class="form-search">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按房间标题进行搜索
+						
+		<form class="form-search" action="game_wait!index">
+			按房间号进入房间
 			<div class="input-append">
-				<input type="text" class="span2 search-query">
-				<button type="submit" class="btn">Search</button>
+				<input type="text" name="id" class="span2 search-query">
+				<button type="submit" class="btn">点击进入</button>
 			</div>
 		</form>
 

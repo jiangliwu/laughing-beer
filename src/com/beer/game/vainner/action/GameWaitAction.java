@@ -36,13 +36,13 @@ public class GameWaitAction extends ActionSupport {
 
 		Map<String, Object> gameInformation = (Map<String, Object>) this
 				.getApplicationData().get(applicationDataKey); // 读出房间信息
-
+		if(gameInformation == null)
+			return "not_exist";
 		List<String> retail = (List<String>) gameInformation.get("retail");
 		List<String> wholesale = (List<String>) gameInformation
 				.get("wholesale");
 		List<String> producer = (List<String>) gameInformation.get("producer");
 		List<String> message = (List<String>) gameInformation.get("message");
-		Integer total = (Integer) gameInformation.get("total"); // 读出角色信息
 
 		this.retailNumber = (Integer) gameInformation.get("retailNumber");
 		this.wholesaleNumber = (Integer) gameInformation.get("wholesaleNumber");

@@ -5,13 +5,21 @@ var Location = cc.Layer.extend({
 	init: function() {
 		this._super();
 		var screenSize = cc.Director.getInstance().getWinSize();
-
-		this._showString = "您所在的房间号码为 : " +  getParameter("id") + " - "+ USER_INDENTIFY;
+		var bg = cc.Sprite.create("client/res/img/location.png");
+		bg.setAnchorPoint(cc.p(0.5, 0.5));
+		bg.setPosition(cc.p(-150,screenSize.height - 50));
+		this.addChild(bg);
+		
+		this._showString = "您的房间号码      " +  getParameter("id") + "          "+ USER_INDENTIFY;
 		this._showLabel = cc.LabelTTF.create(this._showString,"Microsoft Yahei", 14);
-		this._showLabel.setPosition(cc.p(150,screenSize.height - 50));
+		this._showLabel.setPosition(cc.p(130,23));
+		var dest = cc.p(150,screenSize.height - 50);
 		
-		this.addChild(this._showLabel);
-		
+		var a1 =  cc.EaseElasticIn.create(cc.MoveTo.create(0.4,cc.p(dest.x+100,dest.y)));
+        var a2 =  cc.EaseElasticOut.create(cc.MoveTo.create(0.2,dest));
+       
+		bg.addChild(this._showLabel,1);
+		bg.runAction(cc.Sequence.create(a1,a2));
 		return true;
 	},
 
