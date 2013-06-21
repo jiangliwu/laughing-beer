@@ -310,24 +310,32 @@
 				function getSize() {
 					return document.getElementById("data").rows[0].cells.length;
 				}
-
+				
 				(function basic_axis(container) {
 
-					var d1 = [], d2 = [], d3 = [], d4 = [], d5 = [ 0 ],
+					var d1 = [], d2 = [], d3 = [], d4 = [], d5 = [ 0 ];
 
-					ticks = [ [ 0 ], [ 5 ], 10, 15, 20, 25, 30 ], graph;
-
+					
+					var ymax = 0 , dd = [];
 					for ( var i = 0; i < getSize() - 1; i++) {
-						d1.push([ i, getTableValue(1, i + 1) ]);
-						d2.push([ i, getTableValue(2, i + 1) ]);
-						d3.push([ i, getTableValue(3, i + 1) ]);
-						d4.push([ i, getTableValue(4, i + 1) ]);
+						for(var j = 0 ; j < 4 ; j++)
+						{
+							dd[j] = getTableValue(j+1, i + 1);
+							if(dd[j] > ymax) ymax = dd[j];
+						}
+						
+						d1.push([ i, dd[0]]);
+						d2.push([ i, dd[1]]);
+						d3.push([ i, dd[2]]);
+						d4.push([ i, dd[3]]);
 					}
-
+	
 					function ticksFn(n) {
 						return parseInt(n) + 1;
 					}
-
+					var ticks = [], graph;
+					for(var i = 0 ; i <= ymax +1; i++)
+						ticks.push([i]);
 					graph = Flotr.draw(container, [ {
 						data : d1,
 						label : '顾客需求',
@@ -388,7 +396,7 @@
 						},
 						yaxis : {
 							ticks : ticks,
-							max : 35,
+							max : ymax + 1,
 							title : '销量'
 						},
 						grid : {
