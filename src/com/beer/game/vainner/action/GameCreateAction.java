@@ -50,9 +50,9 @@ public class GameCreateAction extends ActionSupport {
 	}
 
 	public String index() {
-		this.setRandomRetail((int) (Math.random() * 6) + 10);
-		this.setRandomWholesale((int) (Math.random() * 6) + 20);
-		this.setRandomProducer((int)( Math.random() * 8) + 28);
+		this.setRandomRetail(12);
+		this.setRandomWholesale(20);
+		this.setRandomProducer(30);
 		return "index";
 	}
 

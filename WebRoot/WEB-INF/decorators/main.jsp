@@ -103,7 +103,7 @@
 								<li><s:a action="dev" includeParams="none">加入游戏</s:a>
 								</li>
 								<li><s:a action="game_hall!mygame">浏览我的记录</s:a></li>
-								<li><s:a action="dev" includeParams="none">Person Manager ( by Conventions )</s:a>
+								
 								</li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -112,13 +112,19 @@
 								<li><s:a action="dev" includeParams="none">模拟供应链</s:a></li>
 								<li><s:a action="dev" includeParams="none">供应链数据分析</s:a>
 								</li>
-								<li><s:a action="dev" includeParams="none">浏览我的记录</s:a>
+								
 								</li>
-								<li><s:a action="dev" includeParams="none">Person Manager ( by Conventions )</s:a>
+								
 								</li>
 							</ul></li>
 
-						<li><a href="">关于</a>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">关于<b class="caret"></b> </a>
+							<ul class="dropdown-menu">
+								<li><a href="about/about.jsp">About</a></li>
+								<li><a href="about/contact.jsp">Contact</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 
@@ -145,11 +151,11 @@
 							data-toggle="dropdown"><i class="icon-book"></i> Wiki<b
 								class="caret"></b> </a>
 							<ul class="dropdown-menu">
-								<li><a href="http://struts.apache.org/2.x/docs/home.html"><i
-										class="icon-share"></i> 搜索条目</a>
+								<li><s:a action="wiki_search" includeParams="none"><i
+										class="icon-search"></i> 搜索条目</s:a>
 								</li>
-								<li><a href="http://struts.apache.org/2.x/docs/home.html"><i
-										class="icon-share"></i> 所有条目</a>
+								<li><s:a action="wiki_all" includeParams="none"><i
+										class="icon-share"></i> 所有条目</s:a>
 								</li>
 							</ul></li>
 					</ul>
@@ -168,7 +174,11 @@
 		<div class="container">
 			<p class="muted credit">
 				Copyright &copy; 2003-2014 <a
-					href="http://www.localhost:8080/laughing-beer/"> 黑方软件 - 供应链系统 alpha 1.0 </a>
+					href="index"> 黑方软件 - 供应链系统 alpha 1.0 </a>
+					<br />
+					<!-- 
+					author : <a href="http://jiangliwu.me">蒋利武</a>(
+		 <a href="mailto:jiangliwu.ipple@gmail.com">jiangliwu.ipple@gmail.com</a>) -->
 			</p>
 			<p class="pull-right">
 				<a href = "" id="back-to-top">回到顶部</a>

@@ -38,7 +38,7 @@
 			<div id="chart"></div>
 
 			<table class="table table-striped table-bordered table-condensed"
-				id="data">
+				id="data" name="data">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -235,10 +235,7 @@
 
 
 					<h3>生产商</h3>
-					<p>
-						总利润 :
-						<fmt:formatNumber value="${producerAllProfit}" pattern="0.00" />
-					</p>
+				
 					<table class="table table-striped table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -305,8 +302,12 @@
 
 			<script type="text/javascript">
 				function getTableValue(x, y) {
+				if(document.getElementById("data").rows[x].cells[y] == null)
+					return 0;
 					return parseInt(document.getElementById("data").rows[x].cells[y].innerHTML);
 				}
+				
+			
 				function getSize() {
 					return document.getElementById("data").rows[0].cells.length;
 				}
@@ -390,7 +391,7 @@
 							noTicks : getSize() - 2,
 							tickFormatter : ticksFn,
 							min : 0,
-							max : getSize() - 2,
+							max : getSize() - 1,
 							labelsAngle : 45,
 							title : '轮数'
 						},
