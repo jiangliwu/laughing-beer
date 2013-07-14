@@ -34,12 +34,17 @@ function Mediator() {
 
 	this.postTurnData = function() {
 		// 取得需要提交的信息
-
 		var self = this;
 		var send, book;
-		if (self._postForm.commitButton.isEnabled() == false) {
+		if (self._postForm.commitButton.isEnabled() == false) {	//手动提交的
 			send = self._postForm.getSendCount();
 			book = self._postForm.getOrderCount();
+			if (isNaN(send) || isNaN(book)) {
+				self._tips.addTip("输入错误，默认不发货不订货！");
+				send = 0;
+				book = 0;
+			}
+			
 		} else {
 			send = (parseInt(Math.random() * 100) % 8 + 8) % 8;
 			book = (parseInt(Math.random() * 100) % 10 + 10) % 10;
@@ -54,7 +59,8 @@ function Mediator() {
 			success : function(data) {
 				var ret = data.split("((((")[1];
 				self._isGeted = false;
-				self._tips.addTip("第 "+self._timer._nowTurns+" 周周末 : 您的货物和订单已经发出!");
+				self._tips.addTip("第 " + self._timer._nowTurns
+						+ " 周周末 : 您的货物和订单已经发出!");
 				self._timer.stopCount();
 				self._details.updateInformationFromServer();
 			}
@@ -67,13 +73,13 @@ function Mediator() {
 			return;
 		var op = msg.split("|")[0];
 		var values = (msg.split("|")[1]).split(",");
-		//cc.log(op + " " + values);
+		// cc.log(op + " " + values);
 		var now = self._timer._nowTurns;
 		if (op.indexOf("order") >= 0) {
-			self._tips.addTip("第 "+now+" 周周初 : 您收到一笔订单，数量为" + values[0]);
+			self._tips.addTip("第 " + now + " 周周初 : 您收到一笔订单，数量为" + values[0]);
 		}
 		if (op.indexOf("receive") > 0) {
-			self._tips.addTip("第 "+now+" 周周初 : 您收到一笔货物，数量为" + values[1]);
+			self._tips.addTip("第 " + now + " 周周初 : 您收到一笔货物，数量为" + values[1]);
 		}
 	},
 
@@ -86,14 +92,10 @@ function Mediator() {
 					url : link,
 					success : function(data) {
 						var ret = data.split("((((")[1];
-						if (self._timer._nowTurns >= self._timer._totalTurns) {
+						if (self._timer._nowTurns >= self._timer._totalTurns
+								|| ret == "gameOver") {
 							cc.Director.getInstance().replaceScene(
 									new GameOverScene());
-
-						}
-						if (ret == "gameOver") {
-							window.location.href = "game_show_record?id="
-									+ getParameter("id");
 						} else if (ret == "no-event") {
 							self._timer.showMessage("这周无事可做");
 						} else if (ret == "wait") {
@@ -104,7 +106,7 @@ function Mediator() {
 						} else {
 							self._details.updateInformationFromServer();
 							self._timer.showMessage("");
-							
+
 							self._timer.startCount();
 							self._isGeted = true;
 							self._command = ret;
